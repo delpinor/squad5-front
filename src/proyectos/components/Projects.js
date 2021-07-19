@@ -26,7 +26,7 @@ class Projects extends React.Component {
     const { isReady, projects } = this.state;
     return (
       <>
-        <div class="row pl-3">
+        <div class="row">
           <div class="col">
             <h3>Projectos</h3>
           </div>

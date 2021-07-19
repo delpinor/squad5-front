@@ -1,5 +1,4 @@
 import React from "react";
-import DatePicker from "react-datepicker";
 import { getProjectById } from "../services/projects";
 import SpinnerCenter from "./SpinnerCenter";
 import SearchForm from "./SearchForm";

@@ -1,13 +1,22 @@
+import axios from "axios";
 const URLBase = "https://project-squad5.herokuapp.com/api/";
 
 export async function getProjects(q) {
-  const response = await fetch(`${URLBase}projects/?q=${q}`);
-  const jsonData = await response.json();
-  return jsonData.data;
+  let response = await axios.get(`${URLBase}projects/?q=${q}`);
+  let data = response.data.data;
+  return data;
 }
 
 export async function getProjectById(id) {
-  const response = await fetch(`${URLBase}projects/${id}`);
-  const jsonData = await response.json();
-  return jsonData.data;
+  let response = await axios.get(`${URLBase}projects/${id}`);
+  let data = response.data.data;
+  return data;
+}
+
+export async function deleteProjecyById(idProject) {
+  let response = await axios
+    .delete(`${URLBase}projects/${idProject}/`)
+    .catch((error) => {
+      window.alert("Error 404: El elemento que intenta eliminar no existe.");
+    });
 }

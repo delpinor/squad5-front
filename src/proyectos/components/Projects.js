@@ -4,6 +4,7 @@ import SpinnerCenter from "./SpinnerCenter";
 import SearchForm from "./SearchForm";
 import ResultMessage from "./ResultMessage";
 import { Link } from "react-router-dom";
+import { readableStatus, readablePriority } from "../services/helpers";
 
 class Projects extends React.Component {
   constructor(props) {
@@ -28,7 +29,7 @@ class Projects extends React.Component {
       <>
         <div class="row pl-3">
           <div class="col">
-            <h3>Projectos</h3>
+            <h3>Proyectos</h3>
           </div>
           <div class="col">
             <SearchForm getByName={this.submitSearch} />
@@ -36,7 +37,7 @@ class Projects extends React.Component {
         </div>
         {!isReady && <SpinnerCenter />}
         {isReady && !projects.length && (
-          <ResultMessage message="No se encontraron resultados." />
+          <ResultMessage message="No se encontraron proyectos." />
         )}
         <table class="table table-hover">
           <thead>
@@ -49,7 +50,7 @@ class Projects extends React.Component {
               <th scope="col">F. Fin real</th>
               <th scope="col">Prioridad</th>
               <th scope="col">Estado</th>
-              <th scope="col">Detalles</th>
+              <th scope="col">Acción</th>
             </tr>
           </thead>
           <tbody>
@@ -61,8 +62,8 @@ class Projects extends React.Component {
                 <td>{project.planned_end_date}</td>
                 <td>{project.real_start_date}</td>
                 <td>{project.real_end_date}</td>
-                <td>{project.priority}</td>
-                <td>{project.status}</td>
+                <td>{readablePriority(project.priority)}</td>
+                <td>{readableStatus(project.status)}</td>
                 <td>
                   <div>
                     <Link to={`/proyectos/${project.id}`}>

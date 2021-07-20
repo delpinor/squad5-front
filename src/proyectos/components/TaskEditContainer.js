@@ -1,7 +1,10 @@
 import React from "react";
-import ProjectDetails from "./ProjectDetails";
+import TaskEdit from "./TaskEdit";
 
-export default function ProjectDetailsContainer(props) {
+export default function TaskEditContainer(props) {
+  const idProject = props.match.params.idProject;
+  const idTask = props.match.params.idTask;
+
   return (
     <>
       <div class="pl-1 pt-2">
@@ -12,15 +15,18 @@ export default function ProjectDetailsContainer(props) {
               <a href="/home">Inicio</a>
             </li>
             <li class="breadcrumb-item">
-              <a href="/proyectos">Proyectos</a>
+              <a href="/Proyectos">Proyectos</a>
+            </li>
+            <li class="breadcrumb-item">
+              <a href={"/proyectos/" + idProject}>Proyecto {idProject}</a>
             </li>
             <li class="breadcrumb-item active" aria-current="page">
-              Detalles
+              {idTask ? "Editar" : "Crear"}
             </li>
           </ol>
         </nav>
       </div>
-      <ProjectDetails idProject={props.match.params.idProject} />
+      <TaskEdit idProject={idProject} idTask={idTask} />
     </>
   );
 }

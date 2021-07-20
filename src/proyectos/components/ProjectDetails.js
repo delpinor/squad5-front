@@ -1,7 +1,10 @@
 import React from "react";
-import { getProjectById } from "../services/projects";
-import SpinnerCenter from "./SpinnerCenter";
-import SearchForm from "./SearchForm";
+import { getProjectById, deleteProjecyById } from "../services/projects";
+import { readableStatus, readablePriority } from "../services/helpers";
+import TaskList from "./TaskList";
+import { Row, Container, Col } from "react-bootstrap";
+import { Link, Redirect } from "react-router-dom";
+import { Modal, ModalBody, ModalFooter } from "react-bootstrap";
 
 class ProjectDetails extends React.Component {
   constructor(props) {
@@ -9,161 +12,114 @@ class ProjectDetails extends React.Component {
     this.state = {
       idProject: this.props.idProject,
       projectInfo: "",
-      tasks: [],
-      isReady: false,
+      showModalProject: false,
+      redirect: false,
     };
   }
+
   async componentDidMount() {
-    const response = await getProjectById(this.state.idProject);
-    this.setState({ projectInfo: response, isReady: true });
-    console.log(this.state.projectInfo);
+    const projectResponse = await getProjectById(this.state.idProject);
+    this.setState({ projectInfo: projectResponse });
   }
 
+  deleteProject = async () => {
+    const response = await deleteProjecyById(this.state.idProject);
+    this.setState({ showModalProject: false, redirect: true });
+  };
   render() {
-    const projectInfo = this.state.projectInfo;
+    const { idProject, redirect, projectInfo } = this.state;
     return (
       <>
-        <div class="row pl-3">
-          <div class="col-5">
-            <h3>{projectInfo.name}</h3>
-          </div>
+        <Container fluid>
+          <h3>{projectInfo.name}</h3>
+          <Link to={`/proyectos/${idProject}/editar`}>
+            <button
+              type="button"
+              className="btn btn-info"
+              title="Editar datos del proyecto"
+            >
+              Editar proyecto
+            </button>
+          </Link>
+          <button
+            onClick={() => this.setState({ showModalProject: true })}
+            type="button"
+            className="btn btn-danger"
+            title="Eliminar proyecto"
+          >
+            Eliminar proyecto
+          </button>
+          <Row>
+            <Col>
+              <p>Id. de Proyecto:</p>
+              <p>{projectInfo.id}</p>
+            </Col>
+            <Col>
+              <p>Líder de proyecto:</p>
+              <p>{projectInfo.leader_id}</p>
+            </Col>
+            <Col>
+              <p>Prioridad:</p>
+              <p>{readablePriority(projectInfo.priority)}</p>
+            </Col>
+            <Col>
+              <p>Estado:</p>
+              <p>{readableStatus(projectInfo.status)}</p>
+            </Col>
+            <Col>
+              <p>Inicio planeado:</p>
+              <p>{projectInfo.planned_start_date}</p>
+            </Col>
+            <Col>
+              <p>Fin planeado:</p>
+              <p>{projectInfo.planned_end_date}</p>
+            </Col>
+            <Col>
+              <p>Inicio real:</p>
+              <p>{projectInfo.real_start_date}</p>
+            </Col>
+            <Col>
+              <p>Fin real:</p>
+              <p>{projectInfo.real_end_date}</p>
+            </Col>
+            <Col>
+              <p>Descripción:</p>
+              <p>{projectInfo.description}</p>
+            </Col>
+          </Row>
+        </Container>
+        <span class="border border-info">
           <div class="col-2">
             <h3>Tareas</h3>
           </div>
-          <div class="col-5">
-            <SearchForm />
-          </div>
-        </div>
-        {!this.state.isReady && <SpinnerCenter />}
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col-5 px-md-3">
-              <form>
-                <div class="form-group row">
-                  <label class="col-sm-3 col-form-label">Id. de Proyecto</label>
-                  <div class="col-sm-6">
-                    <input
-                      type="text"
-                      value={projectInfo.id}
-                      readonly
-                      class="form-control-plaintext"
-                    />
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label class="col-sm-3 col-form-label">Nombre</label>
-                  <div class="col-sm-6">
-                    <input
-                      type="text"
-                      value={projectInfo.name}
-                      readonly
-                      class="form-control-plaintext"
-                    />
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label class="col-sm-3 col-form-label">Descripción</label>
-                  <div class="col-sm-6">
-                    <input
-                      type="text"
-                      value={projectInfo.description}
-                      readonly
-                      class="form-control-plaintext"
-                    />
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label class="col-sm-3 col-form-label">Líder</label>
-                  <div class="col-sm-6">
-                    <input
-                      type="text"
-                      value={projectInfo.leader_id}
-                      readonly
-                      class="form-control-plaintext"
-                    />
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label class="col-sm-3 col-form-label">Inicio planeado</label>
-                  <div class="col-sm-6">
-                    <input
-                      type="text"
-                      value={projectInfo.leader_id}
-                      readonly
-                      class="form-control-plaintext"
-                    />
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label class="col-sm-3 col-form-label">Inicio real</label>
-                  <div class="col-sm-6">
-                    <input
-                      type="text"
-                      readonly
-                      class="form-control-plaintext"
-                    />
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label class="col-sm-3 col-form-label">
-                    Finalización planeada
-                  </label>
-                  <div class="col-sm-6">
-                    <input
-                      type="text"
-                      readonly
-                      class="form-control-plaintext"
-                    />
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label class="col-sm-3 col-form-label">
-                    Finalización real
-                  </label>
-                  <div class="col-sm-6">
-                    <input
-                      type="text"
-                      readonly
-                      class="form-control-plaintext"
-                    />
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label class="col-sm-3 col-form-label">Prioridad</label>
-                  <div class="col-sm-6">
-                    <select id="inputState" class="form-control">
-                      <option selected>Choose...</option>
-                      <option>...</option>
-                    </select>{" "}
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label class="col-sm-3 col-form-label">Estado</label>
-                  <div class="col-sm-6">
-                    <select id="inputState" class="form-control">
-                      <option selected>Choose...</option>
-                      <option>...</option>
-                    </select>{" "}
-                  </div>
-                </div>
-              </form>
-            </div>
-            <div class="col-7">
-              <table class="table table-hover">
-                <thead>
-                  <tr>
-                    <th scope="col">Id</th>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Creación</th>
-                    <th scope="col">Prioridad</th>
-                    <th scope="col">Estado</th>
-                    <th scope="col">Detalles</th>
-                  </tr>
-                </thead>
-              </table>
-            </div>
-          </div>
-        </div>
+          <TaskList idProject={this.state.idProject} />
+        </span>
+        <Modal show={this.state.showModalProject}>
+          <Modal.Header>
+            <Modal.Title>Eliminación</Modal.Title>
+          </Modal.Header>
+          <ModalBody>
+            ¿Confirma la eliminación del proyecto {projectInfo.name}? Si acepta
+            será redirigido al listado de proyectos.
+          </ModalBody>
+          <ModalFooter>
+            <button
+              className="btn btn-danger"
+              onClick={() => this.deleteProject()}
+            >
+              Sí
+            </button>
+            <button
+              className="btn btn-primary"
+              onClick={() => {
+                this.setState({ showModalProject: false });
+              }}
+            >
+              No
+            </button>
+          </ModalFooter>
+        </Modal>
+        {redirect && <Redirect to="/proyectos" />}
       </>
     );
   }

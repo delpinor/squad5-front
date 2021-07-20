@@ -4,9 +4,8 @@ import "./static/projects.css";
 
 const SpinnerCenter = () => (
   <div class="center-screen">
-    <Spinner animation="border" role="status"/>
+    <Spinner animation="border" role="status" />
     <span class="h6">Cargando...</span>
-
   </div>
 );
 export default SpinnerCenter;

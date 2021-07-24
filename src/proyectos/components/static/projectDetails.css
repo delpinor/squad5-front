@@ -1,0 +1,30 @@
+.table {
+    border-collapse: collapse;
+    border-spacing: 10px 10px;
+}
+
+.delete-button {
+    border: 1px solid black;
+    margin: 20px;
+    background-color: #E87A00;
+    color: #001F3D;
+}
+
+.delete-button:hover {
+    background-color: #FF5D00;
+    color: white;
+}
+
+.delete-proyect-button {
+    margin-right: 20px;
+    background-color: #E87A00;
+    color: white;
+}
+
+.delete-proyect-button:hover {
+    background-color: #FF5D00;
+    color: #001F3D;
+}
+
+
+

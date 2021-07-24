@@ -2,10 +2,11 @@ import React from "react";
 import TaskEdit from "./TaskEdit";
 import { capitalize } from "../services/helpers";
 
-export default function TaskEditContainer(props) {
-  const idProject = props.match.params.idProject;
-  const idTask = props.match.params.idTask;
+export default function TaskCreateContainer(props) {
+  const from = props.match.params.from;
   const operation = props.match.params.operation;
+  const idTicket = props.match.params.idTicket;
+
   return (
     <>
       <div class="pl-1 pt-2">
@@ -15,22 +16,16 @@ export default function TaskEditContainer(props) {
               <i href="/home" class="bi bi-house-door-fill m-2" />
               <a href="/home">Inicio</a>
             </li>
-            <li class="breadcrumb-item">
-              <a href="/Proyectos">Proyectos</a>
-            </li>
-            <li class="breadcrumb-item">
-              <a href={"/proyectos/" + idProject}>Proyecto {idProject}</a>
-            </li>
             <li class="breadcrumb-item active" aria-current="page">
-              {capitalize(operation)} tarea
+              Crear tarea
             </li>
           </ol>
         </nav>
       </div>
       <TaskEdit
-        idProject={idProject}
-        idTask={idTask}
+        from={capitalize(from)}
         operation={capitalize(operation)}
+        idTicket={idTicket}
       />
     </>
   );

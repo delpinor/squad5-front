@@ -27,16 +27,14 @@ export default function Navigation_bar() {
             title="Proyectos"
             id="basic-nav-dropdown"
           >
+            <NavDropdown.Item href="/proyectos/proyecto/nuevo">
+              Crear Proyecto
+            </NavDropdown.Item>
+            <NavDropdown.Item href="/tareas/crear/inicio">
+              Crear Tarea
+            </NavDropdown.Item>
             <NavDropdown.Item href="/proyectos">Ver Proyectos</NavDropdown.Item>
-            <NavDropdown.Item href="/proyectos/ver">
-              Crear Proyectos
-            </NavDropdown.Item>
-            <NavDropdown.Item href="/proyectos/tareas/ver">
-              Ver Tareas
-            </NavDropdown.Item>
-            <NavDropdown.Item href="/proyectos/tareas">
-              Crear Tareas
-            </NavDropdown.Item>
+            <NavDropdown.Item href="/tareas/">Ver Tareas</NavDropdown.Item>
           </NavDropdown>
           <NavDropdown
             className="mx-3"

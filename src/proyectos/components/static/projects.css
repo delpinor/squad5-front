@@ -15,6 +15,10 @@
 *
 */
 
+.form-control {
+  margin-left: 10px;
+}
+
 .form-control:focus {
   box-shadow: none;
 }
@@ -37,8 +41,12 @@ tbody {
 }
 
 thead {
-  background-color: white;
+  background-color: rgb(219, 212, 212);
   position: auto;
   top: 1;
   z-index: 1;
+}
+.center_div {
+  margin: 0 auto;
+  width: 60%;
 }

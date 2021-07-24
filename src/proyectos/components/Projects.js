@@ -25,6 +25,9 @@ class Projects extends React.Component {
   };
   render() {
     const { isReady, projects } = this.state;
+    if (!isReady) {
+      return <SpinnerCenter />;
+    }
     return (
       <>
         <div class="row pl-3">
@@ -34,8 +37,16 @@ class Projects extends React.Component {
           <div class="col">
             <SearchForm getByName={this.submitSearch} />
           </div>
+          <Link to={`/proyectos/proyecto/nuevo`}>
+            <button
+              type="button"
+              className="btn btn-success add-task-button"
+              title="Crear proyecto"
+            >
+              Crear proyecto
+            </button>
+          </Link>
         </div>
-        {!isReady && <SpinnerCenter />}
         {isReady && !projects.length && (
           <ResultMessage message="No se encontraron proyectos." />
         )}
@@ -55,7 +66,7 @@ class Projects extends React.Component {
           </thead>
           <tbody>
             {projects.map((project) => (
-              <tr>
+              <tr key={project.id}>
                 <th scope="row">{project.id}</th>
                 <td>{project.name}</td>
                 <td>{project.planned_start_date}</td>
@@ -68,7 +79,7 @@ class Projects extends React.Component {
                   <div>
                     <Link to={`/proyectos/${project.id}`}>
                       <button type="button" className="btn btn-info">
-                        Ver
+                        Administrar
                       </button>
                     </Link>
                   </div>

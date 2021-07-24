@@ -1,8 +1,7 @@
 import React from "react";
 import ProjectEdit from "./ProjectEdit";
 
-export default function ProjectEditContainer(props) {
-  const idProject = props.match.params.idProject;
+export default function ProjectCreateContainer(props) {
   return (
     <>
       <div class="pl-1 pt-2">
@@ -12,19 +11,13 @@ export default function ProjectEditContainer(props) {
               <i href="/home" class="bi bi-house-door-fill m-2" />
               <a href="/home">Inicio</a>
             </li>
-            <li class="breadcrumb-item">
-              <a href="/Proyectos">Proyectos</a>
-            </li>
-            <li class="breadcrumb-item">
-              <a href={"/proyectos/" + idProject}>Proyecto {idProject}</a>
-            </li>
             <li class="breadcrumb-item active" aria-current="page">
-              Editar proyecto
+              Crear proyecto
             </li>
           </ol>
         </nav>
       </div>
-      <ProjectEdit idProject={idProject} operation={"Editar"} />
+      <ProjectEdit idProject={null} operation={"Crear"} />
     </>
   );
 }

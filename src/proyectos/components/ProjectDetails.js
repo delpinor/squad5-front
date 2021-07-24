@@ -2,14 +2,18 @@ import React from "react";
 import { getProjectById, deleteProjecyById } from "../services/projects";
 import { readableStatus, readablePriority } from "../services/helpers";
 import TaskList from "./TaskList";
-import { Row, Container, Col } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import { Link, Redirect } from "react-router-dom";
 import { Modal, ModalBody, ModalFooter } from "react-bootstrap";
+import "./static/projectDetails.css";
+import Employee from "./Employee";
+import SpinnerCenter from "./SpinnerCenter";
 
 class ProjectDetails extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      isReady: false,
       idProject: this.props.idProject,
       projectInfo: "",
       showModalProject: false,
@@ -19,19 +23,62 @@ class ProjectDetails extends React.Component {
 
   async componentDidMount() {
     const projectResponse = await getProjectById(this.state.idProject);
-    this.setState({ projectInfo: projectResponse });
+    if (projectResponse)
+      this.setState({ projectInfo: projectResponse, isReady: true });
   }
 
   deleteProject = async () => {
-    const response = await deleteProjecyById(this.state.idProject);
+    await deleteProjecyById(this.state.idProject);
     this.setState({ showModalProject: false, redirect: true });
   };
   render() {
-    const { idProject, redirect, projectInfo } = this.state;
+    const { idProject, isReady, redirect, projectInfo } = this.state;
+    if (!isReady) {
+      return <SpinnerCenter />;
+    }
     return (
       <>
         <Container fluid>
           <h3>{projectInfo.name}</h3>
+
+          <table class="table">
+            <tr>
+              <th>Id. de Proyecto: </th>
+              <td>{projectInfo.id} </td>
+            </tr>
+            <tr>
+              <th>Líder de proyecto: </th>
+              <td>{projectInfo.leader_name} </td>
+            </tr>
+            <tr>
+              <th>Prioridad: </th>
+              <td>{readablePriority(projectInfo.priority)} </td>
+            </tr>
+            <tr>
+              <th>Estado: </th>
+              <td>{readableStatus(projectInfo.status)}</td>
+            </tr>
+            <tr>
+              <th>Inicio planeado: </th>
+              <td>{projectInfo.planned_start_date}</td>
+            </tr>
+            <tr>
+              <th>Fin planeado: </th>
+              <td>{projectInfo.planned_end_date}</td>
+            </tr>
+            <tr>
+              <th>Inicio real: </th>
+              <td>{projectInfo.real_start_date}</td>
+            </tr>
+            <tr>
+              <th>Fin real: </th>
+              <td>{projectInfo.real_end_date}</td>
+            </tr>
+            <tr>
+              <th>Descripción: </th>
+              <td>{projectInfo.description}</td>
+            </tr>
+          </table>
           <Link to={`/proyectos/${idProject}/editar`}>
             <button
               type="button"
@@ -44,67 +91,33 @@ class ProjectDetails extends React.Component {
           <button
             onClick={() => this.setState({ showModalProject: true })}
             type="button"
-            className="btn btn-danger"
+            className="btn delete-button"
             title="Eliminar proyecto"
           >
             Eliminar proyecto
           </button>
-          <Row>
-            <Col>
-              <p>Id. de Proyecto:</p>
-              <p>{projectInfo.id}</p>
-            </Col>
-            <Col>
-              <p>Líder de proyecto:</p>
-              <p>{projectInfo.leader_id}</p>
-            </Col>
-            <Col>
-              <p>Prioridad:</p>
-              <p>{readablePriority(projectInfo.priority)}</p>
-            </Col>
-            <Col>
-              <p>Estado:</p>
-              <p>{readableStatus(projectInfo.status)}</p>
-            </Col>
-            <Col>
-              <p>Inicio planeado:</p>
-              <p>{projectInfo.planned_start_date}</p>
-            </Col>
-            <Col>
-              <p>Fin planeado:</p>
-              <p>{projectInfo.planned_end_date}</p>
-            </Col>
-            <Col>
-              <p>Inicio real:</p>
-              <p>{projectInfo.real_start_date}</p>
-            </Col>
-            <Col>
-              <p>Fin real:</p>
-              <p>{projectInfo.real_end_date}</p>
-            </Col>
-            <Col>
-              <p>Descripción:</p>
-              <p>{projectInfo.description}</p>
-            </Col>
-          </Row>
         </Container>
+        <hr />
+
         <span class="border border-info">
-          <div class="col-2">
-            <h3>Tareas</h3>
+          <div class="col-2 tarea">
+            <h3>Tareas del proyecto</h3>
           </div>
           <TaskList idProject={this.state.idProject} />
         </span>
         <Modal show={this.state.showModalProject}>
           <Modal.Header>
-            <Modal.Title>Eliminación</Modal.Title>
+            <Modal.Title>
+              <p style={{ color: "Orange" }}>Alerta</p>
+            </Modal.Title>
           </Modal.Header>
           <ModalBody>
-            ¿Confirma la eliminación del proyecto {projectInfo.name}? Si acepta
-            será redirigido al listado de proyectos.
+            ¿Confirma la eliminación del proyecto {projectInfo.name}? Se
+            eliminará el proyecto y sus tareas.
           </ModalBody>
           <ModalFooter>
             <button
-              className="btn btn-danger"
+              className="btn delete-proyect-button"
               onClick={() => this.deleteProject()}
             >
               Sí

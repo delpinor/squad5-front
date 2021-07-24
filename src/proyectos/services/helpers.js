@@ -12,7 +12,7 @@ export function readableStatus(stateStr) {
       return "Bloqueada";
     case "ENESPERA":
       return "En espera";
-    case "INICADO":
+    case "INICIADO":
       return "Iniciado";
     case "ENTRANSICION":
       return "En transición";
@@ -33,4 +33,10 @@ export function readablePriority(priorityStr) {
     default:
       return "--";
   }
+}
+
+export function capitalize(s) {
+  return s.toLowerCase().replace(/\b./g, function (a) {
+    return a.toUpperCase();
+  });
 }

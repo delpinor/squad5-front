@@ -4,8 +4,10 @@ import SearchForm from "./SearchForm";
 import { Link } from "react-router-dom";
 import { getTasks, deleteTaskById } from "../services/tasks";
 import { readableStatus, readablePriority } from "../services/helpers";
-import { Modal, ModalBody, ModalFooter, Container } from "react-bootstrap";
+import { Modal, ModalBody, ModalFooter } from "react-bootstrap";
 import ResultMessage from "./ResultMessage";
+import "./static/taskList.css";
+import Employee from "./Employee";
 
 class TaskList extends React.Component {
   constructor(props) {
@@ -24,14 +26,12 @@ class TaskList extends React.Component {
   }
 
   async componentDidMount() {
-    this.listTasks();
+    this.getTaskList();
   }
-
-  listTasks = async () => {
+  getTaskList = async () => {
     const tasksResponse = await getTasks(this.state.idProject, "");
     this.setState({ tasks: tasksResponse, isReady: true });
   };
-
   setTaskToDelete = (idTask) => {
     this.setState({ taskToDelete: idTask });
   };
@@ -49,33 +49,34 @@ class TaskList extends React.Component {
     this.setState({ tasks: response, isReady: true });
   };
   deleteTask = async () => {
-    const response = await deleteTaskById(
-      this.state.idProject,
-      this.state.taskToDelete
-    );
+    await deleteTaskById(this.state.idProject, this.state.taskToDelete);
     this.setState({ showModalTask: false });
-    this.listTasks();
+    this.getTaskList();
   };
 
   render() {
     const { idProject, tasks, isReady } = this.state;
+    if (!isReady) {
+      return <SpinnerCenter />;
+    }
     return (
       <>
-        <div class="row pl-3">
-          <div class="col-5">
+        <div class="form-group row ">
+          <div class="col-7 col-sm-5 col-form-label">
             <SearchForm getByName={this.submitSearch} />
           </div>
+          <div class="col-sm-5 col-form-label">
+            <Link to={`/proyectos/${idProject}/tarea/crear`}>
+              <button
+                type="button"
+                className="btn btn-success add-task-button"
+                title="Agregar tarea"
+              >
+                Agregar Tarea
+              </button>
+            </Link>
+          </div>
         </div>
-        <Link to={`/proyectos/${idProject}/crear`}>
-          <button
-            type="button"
-            className="btn btn-success"
-            title="Agregar tarea"
-          >
-            Agregar Tarea
-          </button>
-        </Link>
-        {!this.state.isReady && <SpinnerCenter />}
         <div class="">
           {isReady && !tasks.length && (
             <ResultMessage message="No se encontraron tareas." />
@@ -86,6 +87,8 @@ class TaskList extends React.Component {
                 <th scope="col">Id</th>
                 <th scope="col">Nombre</th>
                 <th scope="col">Creación</th>
+                <th scope="col">Inicio</th>
+                <th scope="col">Finalización</th>
                 <th scope="col">Asigando a</th>
                 <th scope="col">Prioridad</th>
                 <th scope="col">Estado</th>
@@ -94,18 +97,22 @@ class TaskList extends React.Component {
             </thead>
             <tbody>
               {tasks.map((task) => (
-                <tr>
+                <tr key={task.task_id}>
                   <th scope="row">{task.task_id}</th>
                   <td>{task.name}</td>
                   <td>{task.created_at}</td>
-                  <td>{task.employee_id}</td>
+                  <td>{task.start_date}</td>
+                  <td>{task.end_date}</td>
+                  <td>
+                    {task.employee_id ? task.employee_name : "No asignado"}
+                  </td>
                   <td>{readablePriority(task.priority)}</td>
                   <td>{readableStatus(task.status)}</td>
                   <td>
                     <div>
                       <button
                         title="Ver descripción"
-                        class="btn btn-primary"
+                        class="btn btn-primary button"
                         onClick={() => {
                           this.setTaskInfo(task.name, task.description);
                         }}
@@ -113,11 +120,11 @@ class TaskList extends React.Component {
                         <i class="bi bi-eye"></i>
                       </button>
                       <Link
-                        to={`/proyectos/${idProject}/${task.task_id}/editar`}
+                        to={`/proyecto/${idProject}/${task.task_id}/editar`}
                       >
                         <button
                           type="button"
-                          className="btn btn-info"
+                          className="btn btn-info button"
                           title="Editar tarea"
                         >
                           <i class="bi bi-pencil-square"></i>
@@ -130,7 +137,7 @@ class TaskList extends React.Component {
                           this.setState({ showModalTask: true });
                           this.setTaskToDelete(task.task_id);
                         }}
-                        className="btn btn-danger"
+                        className="btn delete-task-button"
                         key={task.task_id}
                       >
                         <i class="bi bi-trash"></i>
@@ -142,16 +149,19 @@ class TaskList extends React.Component {
             </tbody>
           </table>
         </div>
+
         <Modal show={this.state.showModalTask}>
           <Modal.Header>
-            <Modal.Title>Eliminación</Modal.Title>
+            <Modal.Title>
+              <p style={{ color: "Orange" }}>Alerta</p>
+            </Modal.Title>
           </Modal.Header>
           <ModalBody>
             ¿Confirma la eliminación de la tarea seleccionada?
           </ModalBody>
           <ModalFooter>
             <button
-              className="btn btn-danger"
+              className="btn delete-task-button"
               onClick={() => this.deleteTask()}
             >
               Sí

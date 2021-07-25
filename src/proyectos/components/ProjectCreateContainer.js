@@ -1,9 +1,10 @@
 import React from "react";
 import ProjectEdit from "./ProjectEdit";
+import "./static/breadcrumb.css";
 
 export default function ProjectCreateContainer(props) {
   return (
-    <>
+    <body className="for-breadcrumb">
       <div class="pl-1 pt-2">
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
@@ -18,6 +19,6 @@ export default function ProjectCreateContainer(props) {
         </nav>
       </div>
       <ProjectEdit idProject={null} operation={"Crear"} />
-    </>
+    </body>
   );
 }

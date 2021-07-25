@@ -4,7 +4,6 @@ import { getTasks } from "../services/tasks";
 import { readableStatus, readablePriority } from "../services/helpers";
 import ResultMessage from "./ResultMessage";
 import "./static/taskList.css";
-import Employee from "./Employee";
 import { Modal, ModalBody, ModalFooter } from "react-bootstrap";
 
 class TaskSummary extends React.Component {
@@ -47,19 +46,23 @@ class TaskSummary extends React.Component {
             <ResultMessage message="No se encontraron tareas." />
           )}
           <table class="table table-hover">
-            <thead>
-              <tr>
-                <th scope="col">Id</th>
-                <th scope="col">Nombre</th>
-                <th scope="col">Creación</th>
-                <th scope="col">Inicio</th>
-                <th scope="col">Finalización</th>
-                <th scope="col">Asigando a</th>
-                <th scope="col">Prioridad</th>
-                <th scope="col">Estado</th>
-                <th scope="col">Ver descripción</th>
-              </tr>
-            </thead>
+            {!tasks.length ? (
+              ""
+            ) : (
+              <thead>
+                <tr>
+                  <th scope="col">Id</th>
+                  <th scope="col">Nombre</th>
+                  <th scope="col">Creación</th>
+                  <th scope="col">Inicio</th>
+                  <th scope="col">Finalización</th>
+                  <th scope="col">Asigando a</th>
+                  <th scope="col">Prioridad</th>
+                  <th scope="col">Estado</th>
+                  <th scope="col">Ver descripción</th>
+                </tr>
+              </thead>
+            )}
             <tbody>
               {tasks.map((task) => (
                 <tr key={task.task_id}>

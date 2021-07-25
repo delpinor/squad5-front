@@ -14,3 +14,18 @@
     background-color: #071330;
     color: white;
 }
+
+.body {
+    background-color: #E0E0E0;
+}
+
+.cancel-task-button {
+    margin-left: 50px;
+    background-color: #2E8BC0;
+    color: white;
+}
+
+.cancel-task-button:hover {
+    background-color: #145DA0;
+    color: white;
+}

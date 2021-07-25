@@ -1,12 +1,15 @@
 import React from "react";
 import { getProjectById, deleteProjecyById } from "../services/projects";
-import { readableStatus, readablePriority } from "../services/helpers";
+import {
+  readableStatus,
+  readablePriority,
+  replaceIfEmpty,
+} from "../services/helpers";
 import TaskList from "./TaskList";
 import { Container } from "react-bootstrap";
 import { Link, Redirect } from "react-router-dom";
 import { Modal, ModalBody, ModalFooter } from "react-bootstrap";
 import "./static/projectDetails.css";
-import Employee from "./Employee";
 import SpinnerCenter from "./SpinnerCenter";
 
 class ProjectDetails extends React.Component {
@@ -41,7 +44,7 @@ class ProjectDetails extends React.Component {
         <Container fluid>
           <h3>{projectInfo.name}</h3>
 
-          <table class="table">
+          <table class="table project-table">
             <tr>
               <th>Id. de Proyecto: </th>
               <td>{projectInfo.id} </td>
@@ -49,6 +52,10 @@ class ProjectDetails extends React.Component {
             <tr>
               <th>Líder de proyecto: </th>
               <td>{projectInfo.leader_name} </td>
+            </tr>
+            <tr>
+              <th>Horas consumidas: </th>
+              <td>{projectInfo.total_hours} </td>
             </tr>
             <tr>
               <th>Prioridad: </th>
@@ -60,19 +67,19 @@ class ProjectDetails extends React.Component {
             </tr>
             <tr>
               <th>Inicio planeado: </th>
-              <td>{projectInfo.planned_start_date}</td>
+              <td>{replaceIfEmpty(projectInfo.planned_start_date)}</td>
             </tr>
             <tr>
               <th>Fin planeado: </th>
-              <td>{projectInfo.planned_end_date}</td>
+              <td>{replaceIfEmpty(projectInfo.planned_end_date)}</td>
             </tr>
             <tr>
               <th>Inicio real: </th>
-              <td>{projectInfo.real_start_date}</td>
+              <td>{replaceIfEmpty(projectInfo.real_start_date)}</td>
             </tr>
             <tr>
               <th>Fin real: </th>
-              <td>{projectInfo.real_end_date}</td>
+              <td>{replaceIfEmpty(projectInfo.real_end_date)}</td>
             </tr>
             <tr>
               <th>Descripción: </th>
@@ -100,7 +107,7 @@ class ProjectDetails extends React.Component {
         <hr />
 
         <span class="border border-info">
-          <div class="col-2 tarea">
+          <div class="col-3 tarea">
             <h3>Tareas del proyecto</h3>
           </div>
           <TaskList idProject={this.state.idProject} />

@@ -1,9 +1,10 @@
 import React from "react";
 import Projects from "./Projects";
+import "./static/breadcrumb.css";
 
 export default function ProjectsContainer() {
   return (
-    <>
+    <body className="for-breadcrumb">
       <div className="pl-1 pt-2">
         <nav aria-label="breadcrumb">
           <ol className="breadcrumb">
@@ -18,6 +19,6 @@ export default function ProjectsContainer() {
         </nav>
       </div>
       <Projects />
-    </>
+    </body>
   );
 }

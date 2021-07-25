@@ -1,9 +1,10 @@
 import React from "react";
 import ProjectDetails from "./ProjectDetails";
+import "./static/breadcrumb.css";
 
 export default function ProjectDetailsContainer(props) {
   return (
-    <>
+    <body className="for-breadcrumb">
       <div className="pl-1 pt-2">
         <nav aria-label="breadcrumb">
           <ol className="breadcrumb">
@@ -21,6 +22,6 @@ export default function ProjectDetailsContainer(props) {
         </nav>
       </div>
       <ProjectDetails idProject={props.match.params.idProject} />
-    </>
+    </body>
   );
 }

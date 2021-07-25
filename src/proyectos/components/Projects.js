@@ -4,7 +4,11 @@ import SpinnerCenter from "./SpinnerCenter";
 import SearchForm from "./SearchForm";
 import ResultMessage from "./ResultMessage";
 import { Link } from "react-router-dom";
-import { readableStatus, readablePriority } from "../services/helpers";
+import {
+  readableStatus,
+  readablePriority,
+  replaceIfEmpty,
+} from "../services/helpers";
 
 class Projects extends React.Component {
   constructor(props) {
@@ -69,10 +73,10 @@ class Projects extends React.Component {
               <tr key={project.id}>
                 <th scope="row">{project.id}</th>
                 <td>{project.name}</td>
-                <td>{project.planned_start_date}</td>
-                <td>{project.planned_end_date}</td>
-                <td>{project.real_start_date}</td>
-                <td>{project.real_end_date}</td>
+                <td>{replaceIfEmpty(project.planned_start_date)}</td>
+                <td>{replaceIfEmpty(project.planned_end_date)}</td>
+                <td>{replaceIfEmpty(project.real_start_date)}</td>
+                <td>{replaceIfEmpty(project.real_end_date)}</td>
                 <td>{readablePriority(project.priority)}</td>
                 <td>{readableStatus(project.status)}</td>
                 <td>

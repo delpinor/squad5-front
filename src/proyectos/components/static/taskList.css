@@ -1,6 +1,7 @@
 .add-task-button {
     color: #D4F1F4;
     background-color: #214ED3;
+    margin-right: 40px;
 }
 
 .add-task-button:hover {

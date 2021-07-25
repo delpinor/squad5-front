@@ -34,7 +34,10 @@ export function readablePriority(priorityStr) {
       return "--";
   }
 }
-
+export function replaceIfEmpty(s) {
+  if (s) return s;
+  return "--";
+}
 export function capitalize(s) {
   return s.toLowerCase().replace(/\b./g, function (a) {
     return a.toUpperCase();

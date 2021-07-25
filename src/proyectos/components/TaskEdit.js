@@ -162,34 +162,11 @@ class TaskEdit extends React.Component {
       return <SpinnerCenter />;
     }
     return (
-      <>
-        <div class="center_div w-50">
+      <body className="body">
+        <div class="center_div w-50 body">
           <div className="form-group row">
             <div class="col-sm-5 col-form-label">
               <h2 class="login-header task-title-style">{operation} tarea</h2>
-            </div>
-            <div class="col-sm-5 col-form-label">
-              <button
-                type="button"
-                className="btn create-button-task"
-                onClick={() => {
-                  this.manageTask();
-                }}
-              >
-                {"Guardar"}
-              </button>
-              {!from && (
-                <button
-                  type="button"
-                  className="btn btn-info"
-                  onClick={() => {
-                    this.setState({ redirect: true });
-                  }}
-                  title="Cancelar"
-                >
-                  Cancelar
-                </button>
-              )}
             </div>
           </div>
           <div className="form-group row">
@@ -214,7 +191,6 @@ class TaskEdit extends React.Component {
               <span>{errorMessages["project"]}</span>
             </div>
           </div>
-          <br />
           <div className="form-group row">
             <div class="col-sm-3 col-form-label">
               <label>Nombre*:</label>
@@ -230,7 +206,6 @@ class TaskEdit extends React.Component {
               <span>{errorMessages["name"]}</span>
             </div>
           </div>
-          <br />
           <div className="form-group row">
             <div class="col-sm-3 col-form-label">
               <label>Descripción:</label>
@@ -245,7 +220,6 @@ class TaskEdit extends React.Component {
               />
             </div>
           </div>
-          <br />
           <div className="form-group row">
             <div class="col-sm-3 col-form-label">
               <label>Asignado a:</label>
@@ -266,43 +240,48 @@ class TaskEdit extends React.Component {
               </select>
             </div>
           </div>
-          <br />
-          <label>Fecha de inicio:</label>
-          <div className="form-group">
-            <DatePicker
-              className="form-control"
-              value={formData.start_date}
-              onChange={(value) => this.handleDateChange("start_date", value)}
-              dateFormat="yyyy-MM-dd"
-              locale="es"
-              isClearable
-            />
+          <div className="form-group row">
+            <div class="col-sm-3 col-form-label">
+              <label>Fecha de inicio:</label>
+            </div>
+            <div class="col-sm-3 col-form-label">
+              <DatePicker
+                className="form-control"
+                value={formData.start_date}
+                onChange={(value) => this.handleDateChange("start_date", value)}
+                dateFormat="yyyy-MM-dd"
+                locale="es"
+                isClearable
+              />
+              <div>
+                <i
+                  className="bi bi-x-lg m-10"
+                  onClick={() => this.clearDateValue("start_date")}
+                ></i>
+              </div>
+            </div>
           </div>
-          <div>
-            <i
-              className="bi bi-x-lg m-10"
-              onClick={() => this.clearDateValue("start_date")}
-            ></i>
+          <div className="form-group row">
+            <div class="col-sm-3 col-form-label">
+              <label>Fecha de finalización:</label>
+            </div>
+            <div class="col-sm-3 col-form-label">
+              <DatePicker
+                className="form-control"
+                value={formData.end_date}
+                onChange={(value) => this.handleDateChange("end_date", value)}
+                locale="es"
+                dateFormat="yyyy-MM-dd"
+              />
+              <div>
+                <i
+                  className="bi bi-x-lg m-10"
+                  onClick={() => this.clearDateValue("end_date")}
+                ></i>
+                <span>{errorMessages["end_date"]}</span>
+              </div>
+            </div>
           </div>
-          <br />
-          <label>Fecha de finalización:</label>
-          <div className="form-group">
-            <DatePicker
-              className="form-control"
-              value={formData.end_date}
-              onChange={(value) => this.handleDateChange("end_date", value)}
-              locale="es"
-              dateFormat="yyyy-MM-dd"
-            />
-          </div>
-          <div>
-            <i
-              className="bi bi-x-lg m-10"
-              onClick={() => this.clearDateValue("end_date")}
-            ></i>
-            <span>{errorMessages["end_date"]}</span>
-          </div>
-          <br />
           <div className="form-group row">
             <div class="col-sm-3 col-form-label">
               <label>Prioridad:</label>
@@ -320,7 +299,6 @@ class TaskEdit extends React.Component {
               </select>
             </div>
           </div>
-          <br />
           <div className="form-group row">
             <div class="col-sm-3 col-form-label">
               <label>Estado:</label>
@@ -339,8 +317,33 @@ class TaskEdit extends React.Component {
                 <option value="BLOQUEADA">Bloqueada</option>
               </select>
             </div>
+
           </div>
-          <br />
+          <div className="form-group row">
+            <div class="col-sm-5 col-form-label">
+              <button
+                type="button"
+                className="btn create-button-task"
+                onClick={() => {
+                  this.manageTask();
+                }}
+              >
+                {"Guardar"}
+              </button>
+              {!from && (
+                <button
+                  type="button"
+                  className="btn cancel-task-button"
+                  onClick={() => {
+                    this.setState({ redirect: true });
+                  }}
+                  title="Cancelar"
+                >
+                  Cancelar
+                </button>
+              )}
+            </div>
+          </div>
         </div>
         {redirect && from && (
           <Redirect
@@ -359,7 +362,7 @@ class TaskEdit extends React.Component {
           message="Tarea guardada correctamente!"
           show={this.state.showModalOK}
         />
-      </>
+      </body>
     );
   }
 }

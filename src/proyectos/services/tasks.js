@@ -2,7 +2,6 @@ import axios from "axios";
 
 const URLBase = "https://project-squad5.herokuapp.com/api/";
 //const URLBase = "http://127.0.0.1:8000/api/";
-const errorPage = "/home/";
 
 export async function getTasks(idProject, q) {
   let response = await axios

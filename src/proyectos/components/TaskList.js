@@ -3,11 +3,14 @@ import SpinnerCenter from "./SpinnerCenter";
 import SearchForm from "./SearchForm";
 import { Link } from "react-router-dom";
 import { getTasks, deleteTaskById } from "../services/tasks";
-import { readableStatus, readablePriority } from "../services/helpers";
+import {
+  readableStatus,
+  readablePriority,
+  replaceIfEmpty,
+} from "../services/helpers";
 import { Modal, ModalBody, ModalFooter } from "react-bootstrap";
 import ResultMessage from "./ResultMessage";
 import "./static/taskList.css";
-import Employee from "./Employee";
 
 class TaskList extends React.Component {
   constructor(props) {
@@ -101,8 +104,8 @@ class TaskList extends React.Component {
                   <th scope="row">{task.task_id}</th>
                   <td>{task.name}</td>
                   <td>{task.created_at}</td>
-                  <td>{task.start_date}</td>
-                  <td>{task.end_date}</td>
+                  <td>{replaceIfEmpty(task.start_date)}</td>
+                  <td>{replaceIfEmpty(task.end_date)}</td>
                   <td>
                     {task.employee_id ? task.employee_name : "No asignado"}
                   </td>

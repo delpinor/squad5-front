@@ -1,7 +1,6 @@
 import axios from "axios";
 const URLBase = "https://project-squad5.herokuapp.com/api/";
 //const URLBase = "http://127.0.0.1:8000/api/";
-const errorPage = "/inicio/";
 
 export async function getProjects(q) {
   let response = await axios
@@ -35,7 +34,7 @@ export async function createProject(data) {
     .post(`${URLBase}projects/`, data)
     .catch((error) => {
       window.alert("Se produjo un error al crear el proyecto. " + error);
-      window.location.href = window.location.href;
+      window.location.href = "/proyectos/proyecto/nuevo";
     });
   return response.data;
 }

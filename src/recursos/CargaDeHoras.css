@@ -28,6 +28,23 @@ input{
     border-color: #001F3D;
 }
 
+.divider{
+    width:50px;
+    height:auto;
+    display:inline-block;
+}
+
+
 #filtro_texto{
     overflow:hidden;
+    color: white;
+    font-size:1.4rem;
+}
+
+#filtro_texto input{
+    margin-left: 10px;
+}
+
+#container_carga{
+    text-align:center;
 }

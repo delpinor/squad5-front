@@ -1,6 +1,7 @@
-.table {
-    border-collapse: collapse;
+.project-table {
+    border-collapse: separate;
     border-spacing: 10px 10px;
+    width: 45%;
 }
 
 .delete-button {

@@ -1,13 +1,14 @@
 import React from "react";
 import TaskEdit from "./TaskEdit";
 import { capitalize } from "../services/helpers";
+import "./static/breadcrumb.css";
 
 export default function TaskEditContainer(props) {
   const idProject = props.match.params.idProject;
   const idTask = props.match.params.idTask;
   const operation = props.match.params.operation;
   return (
-    <>
+    <body className="for-breadcrumb">
       <div class="pl-1 pt-2">
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
@@ -32,6 +33,6 @@ export default function TaskEditContainer(props) {
         idTask={idTask}
         operation={capitalize(operation)}
       />
-    </>
+    </body>
   );
 }

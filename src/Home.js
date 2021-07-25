@@ -1,5 +1,5 @@
 import React from "react";
-import Navigation_bar from "./shared/navbar";
+import NavigationBar from "./shared/navbar";
 import DashboardHomeCard from "./shared/card";
 import "./home.css";
 

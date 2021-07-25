@@ -1,10 +1,11 @@
 import React from "react";
 import ProjectEdit from "./ProjectEdit";
+import "./static/breadcrumb.css";
 
 export default function ProjectEditContainer(props) {
   const idProject = props.match.params.idProject;
   return (
-    <>
+    <body className="for-breadcrumb">
       <div class="pl-1 pt-2">
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
@@ -25,6 +26,6 @@ export default function ProjectEditContainer(props) {
         </nav>
       </div>
       <ProjectEdit idProject={idProject} operation={"Editar"} />
-    </>
+    </body>
   );
 }

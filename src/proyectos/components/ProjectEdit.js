@@ -164,32 +164,7 @@ class ProjectEdit extends React.Component {
             <div class="col-sm-5 col-form-label">
               <h2 class="login-header title-style">{operation} proyecto</h2>
             </div>
-            <div class="col-sm-5 col-form-label">
-              <button
-                type="button"
-                className="btn create-button"
-                onClick={() => {
-                  this.manageProject();
-                }}
-              >
-                {"Guardar"}
-              </button>
-              {operation === "Editar" && (
-                <button
-                  type="button"
-                  className="btn btn-info"
-                  onClick={() => {
-                    this.setState({ redirect: true });
-                  }}
-                  title="Cancelar"
-                >
-                  Cancelar
-                </button>
-              )}
-            </div>
           </div>
-
-          <br />
           <div className="form-group row">
             <div class="col-sm-3 col-form-label">
               <label>Nombre *:</label>
@@ -205,7 +180,6 @@ class ProjectEdit extends React.Component {
             </div>
             <span>{errorMessages["name"]}</span>
           </div>
-          <br />
           <div className="form-group row">
             <div class="col-sm-3 col-form-label">
               <label>Descripción:</label>
@@ -239,128 +213,166 @@ class ProjectEdit extends React.Component {
                 ))}
               </select>
             </div>
-
           </div>
-            <br />
-            <br />
-            <label>Inicio planeado:</label>
-            <div className="form-group">
-              <DatePicker
-                className="form-control"
-                value={formData.planned_start_date}
-                onChange={(value) =>
-                  this.handleDateChange("planned_start_date", value)
-                }
-                locale="es"
-                dateFormat="yyyy-MM-dd"
-              />
+          <div className="form-group row">
+            <div class="col-sm-3 col-form-label">
+              <label>Inicio planeado:</label>
             </div>
-            <div>
-              <i
-                className="bi bi-x-lg m-10"
-                onClick={() => this.clearDateValue("planned_start_date")}
-              ></i>
-            </div>
-            <br />
-            <label>Finalización planeada</label>
-            <div className="form-group">
-              <DatePicker
-                className="form-control"
-                value={formData.planned_end_date}
-                onChange={(value) =>
-                  this.handleDateChange("planned_end_date", value)
-                }
-                locale="es"
-                dateFormat="yyyy-MM-dd"
-              />
-            </div>
-            <div>
-              <i
-                className="bi bi-x-lg m-10"
-                onClick={() => this.clearDateValue("planned_end_date")}
-              ></i>
-              <span>{errorMessages["planned_end_date"]}</span>
-            </div>
-            <br />
-            <label>Inicio real</label>
-            <div className="form-group">
-              <DatePicker
-                className="form-control"
-                value={formData.real_start_date}
-                onChange={(value) =>
-                  this.handleDateChange("real_start_date", value)
-                }
-                locale="es"
-                dateFormat="yyyy-MM-dd"
-              />
-            </div>
-            <div>
-              <i
-                className="bi bi-x-lg m-10"
-                onClick={() => this.clearDateValue("real_start_date")}
-              ></i>
-            </div>
-            <br />
-            <label>Finalización real</label>
-            <div className="form-group">
-              <DatePicker
-                className="form-control"
-                value={formData.real_end_date}
-                onChange={(value) =>
-                  this.handleDateChange("real_end_date", value)
-                }
-                locale="es"
-                dateFormat="yyyy-MM-dd"
-              />
-            </div>
-            <div>
-              <i
-                className="bi bi-x-lg m-10"
-                onClick={() => this.clearDateValue("real_end_date")}
-              ></i>
-              <span>{errorMessages["real_end_date"]}</span>
-            </div>
-            <br />
-            <div className="form-group row">
-              <div class="col-sm-3 col-form-label">
-                <label>Prioridad:</label>
-              </div>
-              <div class="col-sm-3 col-form-label">
-                <select
+            <div class="col-sm-3 col-form-label">
+              <div className="form-group">
+                <DatePicker
                   className="form-control"
-                  name="priority"
-                  onChange={this.handleChange}
-                  value={formData.priority}
-                >
-                  <option value="BAJA">Baja</option>
-                  <option value="MEDIA">Media</option>
-                  <option value="ALTA">Alta</option>
-                </select>
+                  value={formData.planned_start_date}
+                  onChange={(value) =>
+                    this.handleDateChange("planned_start_date", value)
+                  }
+                  locale="es"
+                  dateFormat="yyyy-MM-dd"
+                />
+              </div>
+              <div>
+                <i
+                  className="bi bi-x-lg m-10"
+                  onClick={() => this.clearDateValue("planned_start_date")}
+                ></i>
               </div>
             </div>
-            <br />
-            <div className="form-group row">
-              <div class="col-sm-3 col-form-label">
-                <label>Estado:</label>
-              </div>
-              <div class="col-sm-3 col-form-label">
-                <select
+          </div>
+          <div className="form-group row">
+            <div class="col-sm-3 col-form-label">
+              <label>Finalización planeada</label>
+            </div>
+            <div class="col-sm-3 col-form-label">
+              <div className="form-group">
+                <DatePicker
                   className="form-control"
-                  name="status"
-                  onChange={this.handleChange}
-                  value={formData.status}
-                >
-                  <option value="ENESPERA">En espera</option>
-                  <option value="INICIADO">Inciado</option>
-                  <option value="ENPROGRESO">En progreso</option>
-                  <option value="ENTRANSICION">En transición</option>
-                  <option value="COMPLETADO">Completado</option>
-                </select>
+                  value={formData.planned_end_date}
+                  onChange={(value) =>
+                    this.handleDateChange("planned_end_date", value)
+                  }
+                  locale="es"
+                  dateFormat="yyyy-MM-dd"
+                />
+              </div>
+              <div>
+                <i
+                  className="bi bi-x-lg m-10"
+                  onClick={() => this.clearDateValue("planned_end_date")}
+                ></i>
+                <span>{errorMessages["planned_end_date"]}</span>
               </div>
             </div>
-            <br />
-
-
+          </div>
+          <div className="form-group row">
+            <div class="col-sm-3 col-form-label">
+              <label>Inicio real</label>
+            </div>
+            <div class="col-sm-3 col-form-label">
+              <div className="form-group">
+                <DatePicker
+                  className="form-control"
+                  value={formData.real_start_date}
+                  onChange={(value) =>
+                    this.handleDateChange("real_start_date", value)
+                  }
+                  locale="es"
+                  dateFormat="yyyy-MM-dd"
+                />
+              </div>
+              <div>
+                <i
+                  className="bi bi-x-lg m-10"
+                  onClick={() => this.clearDateValue("real_start_date")}
+                ></i>
+              </div>
+            </div>
+          </div>
+          <div className="form-group row">
+            <div class="col-sm-3 col-form-label">
+              <label>Finalización real</label>
+            </div>
+            <div class="col-sm-3 col-form-label">
+              <div className="form-group">
+                <DatePicker
+                  className="form-control"
+                  value={formData.real_end_date}
+                  onChange={(value) =>
+                    this.handleDateChange("real_end_date", value)
+                  }
+                  locale="es"
+                  dateFormat="yyyy-MM-dd"
+                />
+              </div>
+              <div>
+                <i
+                  className="bi bi-x-lg m-10"
+                  onClick={() => this.clearDateValue("real_end_date")}
+                ></i>
+                <span>{errorMessages["real_end_date"]}</span>
+              </div>
+            </div>
+          </div>
+          <div className="form-group row">
+            <div class="col-sm-3 col-form-label">
+              <label>Prioridad:</label>
+            </div>
+            <div class="col-sm-3 col-form-label">
+              <select
+                className="form-control"
+                name="priority"
+                onChange={this.handleChange}
+                value={formData.priority}
+              >
+                <option value="BAJA">Baja</option>
+                <option value="MEDIA">Media</option>
+                <option value="ALTA">Alta</option>
+              </select>
+            </div>
+          </div>
+          <div className="form-group row">
+            <div class="col-sm-3 col-form-label">
+              <label>Estado:</label>
+            </div>
+            <div class="col-sm-3 col-form-label">
+              <select
+                className="form-control"
+                name="status"
+                onChange={this.handleChange}
+                value={formData.status}
+              >
+                <option value="ENESPERA">En espera</option>
+                <option value="INICIADO">Inciado</option>
+                <option value="ENPROGRESO">En progreso</option>
+                <option value="ENTRANSICION">En transición</option>
+                <option value="COMPLETADO">Completado</option>
+              </select>
+            </div>
+          </div>
+          <div className="form-group row">
+            <div class="col-sm-5 col-form-label">
+              <button
+                type="button"
+                className="btn create-button"
+                onClick={() => {
+                  this.manageProject();
+                }}
+              >
+                {"Guardar"}
+              </button>
+              {operation === "Editar" && (
+                <button
+                  type="button"
+                  className="btn btn-info"
+                  onClick={() => {
+                    this.setState({ redirect: true });
+                  }}
+                  title="Cancelar"
+                >
+                  Cancelar
+                </button>
+              )}
+            </div>
+          </div>
         </div>
         {redirect && (
           <Redirect

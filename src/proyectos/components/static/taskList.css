@@ -37,3 +37,7 @@
 .text-center {
   text-align: center;
 }
+thead {
+  background-color: #045174;
+  color: #ffffff;
+}

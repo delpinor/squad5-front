@@ -1,7 +1,11 @@
 import React from "react";
 import SpinnerCenter from "./SpinnerCenter";
 import { getTasks } from "../services/tasks";
-import { readableStatus, readablePriority } from "../services/helpers";
+import {
+  readableStatus,
+  readablePriority,
+  replaceIfEmpty,
+} from "../services/helpers";
 import ResultMessage from "./ResultMessage";
 import "./static/taskList.css";
 import { Modal, ModalBody, ModalFooter } from "react-bootstrap";
@@ -91,11 +95,9 @@ class TaskSummary extends React.Component {
                   <th scope="row">{task.task_id}</th>
                   <td>{task.name}</td>
                   <td>{task.created_at}</td>
-                  <td>{task.start_date}</td>
-                  <td>{task.end_date}</td>
-                  <td>
-                    {task.employee_id ? task.employee_name : "No asignado"}
-                  </td>
+                  <td>{replaceIfEmpty(task.start_date)}</td>
+                  <td>{replaceIfEmpty(task.end_date)}</td>
+                  <td>{task.employee_id ? task.employee_name : "--"}</td>
                   <td>{readablePriority(task.priority)}</td>
                   <td>{readableStatus(task.status)}</td>
                   <td className="text-center">

@@ -130,9 +130,7 @@ class TaskList extends React.Component {
                   <td>{task.created_at}</td>
                   <td>{replaceIfEmpty(task.start_date)}</td>
                   <td>{replaceIfEmpty(task.end_date)}</td>
-                  <td>
-                    {task.employee_id ? task.employee_name : "No asignado"}
-                  </td>
+                  <td>{task.employee_id ? task.employee_name : "--"}</td>
                   <td>{readablePriority(task.priority)}</td>
                   <td>{readableStatus(task.status)}</td>
                   <td>

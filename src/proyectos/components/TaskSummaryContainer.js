@@ -23,19 +23,19 @@ class TaskSummaryContainer extends React.Component {
     }
     return (
       <>
-      <div className="pt-1">
-        <nav aria-label="breadcrumb">
-          <ol class="breadcrumb ol-bread">
-            <li className="breadcrumb-item">
-              <i href="/home" className="bi bi-house-door-fill m-2" />
-              <a href="/home">Inicio</a>
-            </li>
-            <li class="breadcrumb-item active" aria-current="page">
-              Lista de tareas
-            </li>
-          </ol>
-        </nav>
-      </div>
+        <div className="pt-1">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb ol-bread">
+              <li className="breadcrumb-item">
+                <i href="/home" className="bi bi-house-door-fill m-2" />
+                <a href="/home">Inicio</a>
+              </li>
+              <li class="breadcrumb-item active" aria-current="page">
+                Lista de tareas
+              </li>
+            </ol>
+          </nav>
+        </div>
 
         {isReady && !projects.length && (
           <ResultMessage message="No se encontraron proyectos." />

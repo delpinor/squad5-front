@@ -1,8 +1,8 @@
 export const products = [
     {
         id: 1,
-        name: "Musica Open Source",
-        version: "1.0.21"
+        name: "Siu Guarani 4",
+        version: "1.0.0"
     },
     {
         id: 2,

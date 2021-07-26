@@ -1,11 +1,13 @@
 import React, {useState, useEffect} from 'react'
 import NavigationBar from '../shared/navbar'
 import TicketGrid from './components/TicketGrid'
-import { Form, InputGroup, Button, Alert } from 'react-bootstrap'
+import { Form, InputGroup, Button, Alert,ToggleButton,ButtonGroup } from 'react-bootstrap'
 import {
     useParams,
     Link
 } from "react-router-dom";
+
+import Checkbox from '@material-ui/core/Checkbox';
 
 import {products} from './ProductList'
 
@@ -14,6 +16,7 @@ export default function SupportTicketGrid() {
     const [ticketList, setTicketList] = useState([])
     const [ticketFiltered, setTicketFiltered] = useState([])
     const [isFiltered, setIsFiltered] = useState(false);
+    const [isChecked, setIsChecked] = useState(false);
     const [inputSearch, setInputSearch] = useState("")
     const selectedProduct = products.filter((product) => product.id.toString() === idProducto)[0]
 
@@ -27,6 +30,20 @@ export default function SupportTicketGrid() {
         setTicketFiltered(filteredTickets);
         setIsFiltered(true)
     }
+
+    const searchStates = () => {
+        if(isChecked==false){
+            const filteredTickets = ticketList.filter((item) => (item.state == 'RESUELTO'))
+            setTicketFiltered(filteredTickets);
+            setIsFiltered(true)
+            setIsChecked(true)
+        }else{
+            setTicketFiltered(ticketList);
+            setIsFiltered(false)
+            setIsChecked(false)
+        }
+    }
+
 
     const getTicketsForProduct = () => {
         const url = `https://psa2021-soporte.herokuapp.com/ticket/product/${idProducto}`
@@ -55,6 +72,7 @@ export default function SupportTicketGrid() {
         getTicketsForProduct();
     },[]);
 
+
     return (
         <div style= {{backgroundColor:'#eee', height:'100vh'}}>
             <NavigationBar/>
@@ -77,10 +95,16 @@ export default function SupportTicketGrid() {
                     <InputGroup className="mb-3">
                         <Form.Control onChange={(e) => setInputSearch(e.target.value)} type="search" placeholder="Buscar ticket.."/>
                         <InputGroup.Append>
-                            <Button  variant="primary" style={{backgroundColor:'#001F3D',borderColor:'#001F3D',color:'white' }} onClick={() => searchProducts(inputSearch)}>Buscar</Button>
+                            <Button  variant="primary" style={{backgroundColor:'#001F3D',borderColor:'#001F3D',color:'white' }} onEnter={() => searchProducts(inputSearch)} onClick={() => searchProducts(inputSearch)}>Buscar</Button>
                         </InputGroup.Append>
                     </InputGroup>
                 </Form>
+                <Checkbox style={{color: '#045174',marginLeft:'75%'}}
+                    value={isChecked}
+                    inputProps={{ 'aria-label': 'Checkbox A' }} onClick={() => searchStates()}  
+                /> Mostrar Solo Resueltos
+                
+
                 {
                     ticketList.length === 0 || (ticketFiltered.length === 0 && isFiltered) ?
                     <Alert variant={"danger"} style={{margin:'3% 15% 0 15%', padding:'1%'}}>No hay resultados disponibles.</Alert>:

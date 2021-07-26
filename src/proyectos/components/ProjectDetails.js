@@ -42,45 +42,36 @@ class ProjectDetails extends React.Component {
     return (
       <>
         <Container fluid>
-          <h3>{projectInfo.name}</h3>
-
-          <table class="table project-table">
-            <tr>
-              <th>Id. de Proyecto: </th>
-              <td>{projectInfo.id} </td>
-            </tr>
+          <div className="col">
+            <h2>{projectInfo.name}</h2>
+          </div>
+          <table class="table project-table tabla-detalles">
             <tr>
               <th>Líder de proyecto: </th>
               <td>{projectInfo.leader_name} </td>
-            </tr>
-            <tr>
-              <th>Horas consumidas: </th>
-              <td>{projectInfo.total_hours} </td>
-            </tr>
-            <tr>
-              <th>Prioridad: </th>
-              <td>{readablePriority(projectInfo.priority)} </td>
-            </tr>
-            <tr>
-              <th>Estado: </th>
-              <td>{readableStatus(projectInfo.status)}</td>
-            </tr>
-            <tr>
               <th>Inicio planeado: </th>
               <td>{replaceIfEmpty(projectInfo.planned_start_date)}</td>
             </tr>
             <tr>
+              <th>Estado: </th>
+              <td>{readableStatus(projectInfo.status)}</td>
               <th>Fin planeado: </th>
               <td>{replaceIfEmpty(projectInfo.planned_end_date)}</td>
             </tr>
             <tr>
+              <th>Horas consumidas: </th>
+              <td>{projectInfo.total_hours} </td>
               <th>Inicio real: </th>
               <td>{replaceIfEmpty(projectInfo.real_start_date)}</td>
             </tr>
             <tr>
+              <th>Prioridad: </th>
+              <td>{readablePriority(projectInfo.priority)} </td>
               <th>Fin real: </th>
               <td>{replaceIfEmpty(projectInfo.real_end_date)}</td>
             </tr>
+          </table>
+          <table class="table project-table tabla-detalles">
             <tr>
               <th>Descripción: </th>
               <td>{projectInfo.description}</td>
@@ -107,9 +98,6 @@ class ProjectDetails extends React.Component {
         <hr />
 
         <span class="border border-info">
-          <div class="col-3 tarea">
-            <h3>Tareas del proyecto</h3>
-          </div>
           <TaskList idProject={this.state.idProject} />
         </span>
         <Modal show={this.state.showModalProject}>

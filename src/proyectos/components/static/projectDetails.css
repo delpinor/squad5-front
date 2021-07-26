@@ -1,31 +1,34 @@
 .project-table {
-    border-collapse: separate;
-    border-spacing: 10px 10px;
-    width: 45%;
+  border-collapse: separate;
+  border-spacing: 10px 0px;
+  width: 80%;
 }
 
 .delete-button {
-    border: 1px solid black;
-    margin: 20px;
-    background-color: #E87A00;
-    color: #001F3D;
+  border: 1px solid black;
+  margin: 20px;
+  background-color: #e87a00;
+  color: #001f3d;
 }
 
 .delete-button:hover {
-    background-color: #FF5D00;
-    color: white;
+  background-color: #ff5d00;
+  color: white;
 }
 
 .delete-proyect-button {
-    margin-right: 20px;
-    background-color: #E87A00;
-    color: white;
+  margin-right: 20px;
+  background-color: #e87a00;
+  color: white;
 }
 
 .delete-proyect-button:hover {
-    background-color: #FF5D00;
-    color: #001F3D;
+  background-color: #ff5d00;
+  color: #001f3d;
 }
-
-
-
+.project-but {
+  background-color: #ff5d00;
+}
+.tabla-detalles {
+  width: 100%;
+}

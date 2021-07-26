@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Form, InputGroup, Button } from 'react-bootstrap'
+import { Form, InputGroup, Button ,Alert} from 'react-bootstrap'
 
 import NavigationBar from '../shared/navbar'
 import ProductCard from './components/ProductCard'
@@ -23,9 +23,6 @@ export default function Support() {
     return (
         <div style={{backgroundColor:'#eee', color:'black', paddingBottom:'3%'}}>
             <NavigationBar/>
-            <br/>
-            <br/>
-            <br/>
             <div style={{marginTop:'1%'}}>
             <ul style={{  padding: '10px 5%',  listStyle: 'none',  backgroundColor:'#E0E0E0', color: 'black', flexDirection:'row', display:'flex'}}>
                 <li style={{marginRight:'5px'}}><a href="/home"> Home</a> / </li>
@@ -58,7 +55,7 @@ export default function Support() {
                         productList.map((item) => (
                             <ProductCard name={item.name} version={item.version} id={item.id}/>
                         )) :
-                        <h3>No hay resultados disponibles.</h3>
+                        <Alert variant={"danger"} style={{margin:'3% 15% 0 15%', padding:'1%'}}>No hay resultados disponibles.</Alert>
                     }
                 </div>
             </div>

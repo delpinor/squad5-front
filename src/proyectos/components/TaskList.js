@@ -64,38 +64,61 @@ class TaskList extends React.Component {
     }
     return (
       <>
-        <div class="form-group row ">
-          <div class="col-7 col-sm-5 col-form-label">
+        <div class="row pl-3">
+          <div class="col">
+            <h3>Tareas del proyecto</h3>
+          </div>
+          <div class="col">
             <SearchForm getByName={this.submitSearch} />
           </div>
-          <div class="col-sm-5 col-form-label">
-            <Link to={`/proyectos/${idProject}/tarea/crear`}>
-              <button
-                type="button"
-                className="btn btn-success add-task-button"
-                title="Agregar tarea"
-              >
-                Agregar Tarea
-              </button>
-            </Link>
-          </div>
+          <Link to={`/proyectos/${idProject}/tarea/crear`}>
+            <button
+              type="button"
+              className="btn btn-success add-task-button"
+              title="Agregar tarea"
+            >
+              Agregar Tarea
+            </button>
+          </Link>
         </div>
-        <div class="">
+        <div className="">
           {isReady && !tasks.length && (
             <ResultMessage message="No se encontraron tareas." />
           )}
-          <table class="table table-hover">
+          <table className="table table-hover centrada-borde">
             <thead>
               <tr>
-                <th scope="col">Id</th>
-                <th scope="col">Nombre</th>
-                <th scope="col">Creación</th>
-                <th scope="col">Inicio</th>
-                <th scope="col">Finalización</th>
-                <th scope="col">Asigando a</th>
-                <th scope="col">Prioridad</th>
-                <th scope="col">Estado</th>
-                <th scope="col">Acciones</th>
+                <th style={{ width: "5%" }} scope="col">
+                  Id
+                </th>
+                <th style={{ width: "22%" }} scope="col">
+                  Nombre
+                </th>
+                <th style={{ width: "8%" }} scope="col">
+                  Creación
+                </th>
+                <th style={{ width: "8%" }} scope="col">
+                  Inicio
+                </th>
+                <th style={{ width: "8%" }} scope="col">
+                  Finalización
+                </th>
+                <th style={{ width: "16%" }} scope="col">
+                  Asigando a
+                </th>
+                <th style={{ width: "9%" }} scope="col">
+                  Prioridad
+                </th>
+                <th style={{ width: "9%" }} scope="col">
+                  Estado
+                </th>
+                <th
+                  className="text-center"
+                  style={{ width: "15%" }}
+                  scope="col"
+                >
+                  Acciones
+                </th>
               </tr>
             </thead>
             <tbody>
@@ -112,7 +135,7 @@ class TaskList extends React.Component {
                   <td>{readablePriority(task.priority)}</td>
                   <td>{readableStatus(task.status)}</td>
                   <td>
-                    <div>
+                    <div className="text-center">
                       <button
                         title="Ver descripción"
                         class="btn btn-primary button"

@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { Modal, Button, Card,Dropdown } from 'react-bootstrap'
+import { Link } from "react-router-dom";
 
-export default function AddTaskModal({showModal, handleCloseModal, idTicket}) {
+export default function AddTaskModal({showModal, handleCloseModal, idTicket, handleOpenModalSuccessLink, getTasksLinked}) {
     const [projectList, setProjectList] = useState([])
     const [taskList, setTaskList] = useState([])
 
@@ -41,21 +42,14 @@ export default function AddTaskModal({showModal, handleCloseModal, idTicket}) {
 
     const linkTaskWithTicket = () => {
         console.log("Task es :",taskSelected);
-        console.log(`Quiero vincular el task ${taskSelected.idTask} al ticket ${idTicket}`);
+        console.log(`Quiero asdas vincular el task ${taskSelected.idTask} al ticket ${idTicket}`);
 
-        const url = `https://psa2021-soporte.herokuapp.com/ticket​/${idTicket}​/task​/${taskSelected.idTask}`
+        const url = `http://psa2021-soporte.herokuapp.com/ticket/${idTicket}/task/${taskSelected.idTask}`
+        console.log("url:",url);
 
-        const jsonBody = JSON.stringify({
-            ticketId: idTicket,
-            taskId: taskSelected.idTask
-        })    
+ 
         const requestOptions = {
             method: 'POST',
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: jsonBody
         }
     
         fetch(url, requestOptions)
@@ -65,6 +59,8 @@ export default function AddTaskModal({showModal, handleCloseModal, idTicket}) {
                    return;
                 }
                 console.log("asociacion OK");
+                handleOpenModalSuccessLink()
+                getTasksLinked()
             })
     }
 
@@ -137,7 +133,9 @@ export default function AddTaskModal({showModal, handleCloseModal, idTicket}) {
             <h5 style={{marginRight:'4%',backgroundColor:'#eee'}}>Agregar nueva tarea</h5>
         </Modal.Header>
         <Modal.Body>
-            <Button variant="primary" style={{backgroundColor:'#ca6212',border:'none',color:'white',marginBottom:'5%', alignSelf:'flex-end' }}>Crear nueva tarea</Button>
+            <Link to={`/tareas/crear/soporte/${idTicket}`}>
+                <Button variant="primary" style={{backgroundColor:'#ca6212',border:'none',color:'white',marginBottom:'5%', alignSelf:'flex-end' }}>Crear nueva tarea</Button>
+            </Link>
             <div style={{ margin: '0 10% 0 10%', overflow:'auto'}}>
                 <DashboardDropdownCard itemName="project" title="Proyecto" data= {projectSelected !== "" ? projectSelected : "Seleccionar proyecto"} dropdownItems={projectList}/>
                 <DashboardDropdownCard itemName="task" title="Tarea" data= {taskSelected.name !== "" ? taskSelected.name : "Seleccionar tarea"} dropdownItems={taskList}/>

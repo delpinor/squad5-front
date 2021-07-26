@@ -25,7 +25,7 @@ async function postData(url = '', data = {}) {
         referrerPolicy: 'no-referrer',
         body: JSON.stringify(data)
     });
-    return response;
+    return response.json();
 }
 
 
@@ -197,7 +197,6 @@ export default function FormEditHoras(){
         {"fecha": (new Date(document.getElementById('fecha_carga').value.substr(0,4), document.getElementById('fecha_carga').value.substr(5,2) -1, document.getElementById('fecha_carga').value.substr(8,2))).toISOString(),
         "horas": document.getElementById('input_horas').value,
         "legajoPersona": 1, //Esto sería el del user si estuviese implementado el login
-        "idCarga": {id}.id,
         "proyecto": id_proy_seleccionado,
         "tarea": id_tarea_seleccionada,
         "nombreTarea": document.getElementById('combo-box-tareas').value});
@@ -208,7 +207,7 @@ export default function FormEditHoras(){
             setData({'titulo': 'Error', 'mensaje': response.message, 'tipo': 'error', 'redirect': '' });
         }
         else {
-            setData({'titulo': 'Correcto', 'mensaje': 'Carga realizada correctamente', 'tipo': 'success', 'redirect': '/recursos/horas'});
+            setData({'titulo': 'Correcto', 'mensaje': 'Carga '+{id}.id+' modificada correctamente' , 'tipo': 'success', 'redirect': '/recursos/horas'});
         }
         handleShow();
     }
@@ -226,9 +225,6 @@ export default function FormEditHoras(){
     return (
         <div>
             <NavigationBar />
-            <br/>
-            <br/>
-            <br/>
             <ul style={{  padding: '10px 5%',  listStyle: 'none',  backgroundColor:'#E0E0E0', color: 'black', flexDirection:'row', display:'flex'}}>
                 <li style={{marginRight:'5px'}}><a href="/home"> Home</a> / </li>
                 <li style={{marginRight:'5px'}}><a href="/recursos"> Recursos</a> / </li>

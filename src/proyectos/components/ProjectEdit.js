@@ -44,14 +44,14 @@ class ProjectEdit extends React.Component {
   }
   async componentDidMount() {
     let emps = await getEmployees();
-    this.setState({ employees: emps, isReady: true });
+    this.setState({ employees: emps });
 
     //Obtengo para editar
     if (this.state.operation === "Editar") {
       let project = await getProjectById(this.state.idProject);
-      this.setState({ formData: project, isReady: true });
+      this.setState({ formData: project });
     }
-    this.setState({ idReady: true });
+    this.setState({ isReady: true });
   }
 
   createProject = async () => {
@@ -98,9 +98,10 @@ class ProjectEdit extends React.Component {
 
     //Cargo los errores
     let name = this.state.formData.name;
+    const hStyle = { color: "red" };
     this.setState({
       errorMessages: {
-        name: !name ? "Campo obligatorio" : "",
+        name: !name ? <h6 style={hStyle}>Campo obligatorio</h6> : "",
         planned_end_date: wrongDatePlanned
           ? "Fecha de finalización planeada debe ser posterior"
           : "",
@@ -167,18 +168,19 @@ class ProjectEdit extends React.Component {
           </div>
           <div className="form-group row">
             <div class="col-sm-3 col-form-label">
-              <label>Nombre *:</label>
+              <label>Nombre(*):</label>
             </div>
             <div class="col-sm-8 col-form-label">
               <input
+                maxlength="50"
                 className="form-control "
                 type="text"
                 name="name"
                 value={formData.name}
                 onChange={this.handleChange}
               />
+              <p className="p-corrido">{errorMessages["name"]}</p>
             </div>
-            <span>{errorMessages["name"]}</span>
           </div>
           <div className="form-group row">
             <div class="col-sm-3 col-form-label">
@@ -186,6 +188,7 @@ class ProjectEdit extends React.Component {
             </div>
             <div class="col-sm-8 col-form-label">
               <textarea
+                maxlength="1024"
                 className="form-control"
                 type="text"
                 name="description"
@@ -230,7 +233,9 @@ class ProjectEdit extends React.Component {
                   dateFormat="yyyy-MM-dd"
                 />
               </div>
-              <div>
+            </div>
+            <div class="col-sm-3 col-form-label">
+              <div className="icon-center">
                 <i
                   className="bi bi-x-lg m-10"
                   onClick={() => this.clearDateValue("planned_start_date")}
@@ -254,12 +259,14 @@ class ProjectEdit extends React.Component {
                   dateFormat="yyyy-MM-dd"
                 />
               </div>
-              <div>
+              <p className="p-corrido">{errorMessages["planned_end_date"]}</p>
+            </div>
+            <div class="col-sm-3 col-form-label">
+              <div className="icon-center">
                 <i
                   className="bi bi-x-lg m-10"
                   onClick={() => this.clearDateValue("planned_end_date")}
                 ></i>
-                <span>{errorMessages["planned_end_date"]}</span>
               </div>
             </div>
           </div>
@@ -279,7 +286,9 @@ class ProjectEdit extends React.Component {
                   dateFormat="yyyy-MM-dd"
                 />
               </div>
-              <div>
+            </div>
+            <div class="col-sm-3 col-form-label">
+              <div className="icon-center">
                 <i
                   className="bi bi-x-lg m-10"
                   onClick={() => this.clearDateValue("real_start_date")}
@@ -303,12 +312,14 @@ class ProjectEdit extends React.Component {
                   dateFormat="yyyy-MM-dd"
                 />
               </div>
-              <div>
+              <p className="p-corrido">{errorMessages["real_end_date"]}</p>
+            </div>
+            <div class="col-sm-3 col-form-label">
+              <div className="icon-center">
                 <i
                   className="bi bi-x-lg m-10"
                   onClick={() => this.clearDateValue("real_end_date")}
                 ></i>
-                <span>{errorMessages["real_end_date"]}</span>
               </div>
             </div>
           </div>
@@ -348,7 +359,8 @@ class ProjectEdit extends React.Component {
               </select>
             </div>
           </div>
-          <div className="form-group row">
+          <p>(*) Indica campo obligatorio</p>
+          <div className="form-group row div-central">
             <div class="col-sm-5 col-form-label">
               <button
                 type="button"

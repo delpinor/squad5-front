@@ -54,18 +54,39 @@ class Projects extends React.Component {
         {isReady && !projects.length && (
           <ResultMessage message="No se encontraron proyectos." />
         )}
-        <table class="table table-hover">
+        <table class="table table-hover centrada-borde">
           <thead>
             <tr>
-              <th scope="col">Id</th>
-              <th scope="col">Nombre</th>
-              <th scope="col">Inicio planeado</th>
-              <th scope="col">F. Fin planeado</th>
-              <th scope="col">F. Inicio real</th>
-              <th scope="col">F. Fin real</th>
-              <th scope="col">Prioridad</th>
-              <th scope="col">Estado</th>
-              <th scope="col">Acción</th>
+              <th style={{ width: "5%" }} scope="col">
+                Id
+              </th>
+              <th style={{ width: "19%" }} scope="col">
+                Nombre
+              </th>
+              <th style={{ width: "10%" }} scope="col">
+                Inicio planeado
+              </th>
+              <th style={{ width: "10%" }} scope="col">
+                F. Fin planeado
+              </th>
+              <th style={{ width: "10%" }} scope="col">
+                F. Inicio real
+              </th>
+              <th style={{ width: "10%" }} scope="col">
+                F. Fin real
+              </th>
+              <th className="text-center" style={{ width: "10%" }} scope="col">
+                Horas consumidas
+              </th>
+              <th style={{ width: "8%" }} scope="col">
+                Prioridad
+              </th>
+              <th style={{ width: "8%" }} scope="col">
+                Estado
+              </th>
+              <th className="text-center" style={{ width: "10%" }} scope="col">
+                Acción
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -77,10 +98,11 @@ class Projects extends React.Component {
                 <td>{replaceIfEmpty(project.planned_end_date)}</td>
                 <td>{replaceIfEmpty(project.real_start_date)}</td>
                 <td>{replaceIfEmpty(project.real_end_date)}</td>
+                <td className="text-center">{project.total_hours}</td>
                 <td>{readablePriority(project.priority)}</td>
                 <td>{readableStatus(project.status)}</td>
                 <td>
-                  <div>
+                  <div className="text-center">
                     <Link to={`/proyectos/${project.id}`}>
                       <button type="button" className="btn btn-info">
                         Administrar

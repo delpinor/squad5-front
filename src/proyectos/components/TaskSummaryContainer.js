@@ -23,9 +23,9 @@ class TaskSummaryContainer extends React.Component {
     }
     return (
       <>
-      <div className="pl-1 pt-2">
+      <div className="pt-1">
         <nav aria-label="breadcrumb">
-          <ol className="breadcrumb">
+          <ol class="breadcrumb ol-bread">
             <li className="breadcrumb-item">
               <i href="/home" className="bi bi-house-door-fill m-2" />
               <a href="/home">Inicio</a>
@@ -36,17 +36,13 @@ class TaskSummaryContainer extends React.Component {
           </ol>
         </nav>
       </div>
-        <div class="row pl-3">
-          <div class="col">
-            <h2>Listado de tareas</h2>
-          </div>
-        </div>
+
         {isReady && !projects.length && (
           <ResultMessage message="No se encontraron proyectos." />
         )}
         {projects.map((project) => (
           <div>
-            <h4>Proyecto: {project.name}</h4>
+            <h4 className="ml-3 pt-2">{project.name}</h4>
             <TaskSummary idProject={project.id} />
           </div>
         ))}

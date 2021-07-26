@@ -5,9 +5,9 @@ import "./static/breadcrumb.css";
 export default function ProjectsContainer() {
   return (
     <body className="for-breadcrumb">
-      <div className="pl-1 pt-2">
+      <div className="pt-1">
         <nav aria-label="breadcrumb">
-          <ol className="breadcrumb">
+          <ol class="breadcrumb ol-bread">
             <li className="breadcrumb-item">
               <i href="/home" className="bi bi-house-door-fill m-2" />
               <a href="/home">Inicio</a>

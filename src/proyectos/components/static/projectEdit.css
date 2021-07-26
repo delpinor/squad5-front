@@ -1,6 +1,6 @@
 .form-control {
-    border-radius: 15px;
-    /*background-color: #C3CEDA;
+  border-radius: 15px;
+  /*background-color: #C3CEDA;
     color: #071330;*/
 }
 /*
@@ -10,22 +10,27 @@
 }*/
 
 .title-style {
-    text-align: center;
-    border-radius: 15px;
-    background-color: #BBC8DE;
-    color: #122620;
+  text-align: center;
+  border-radius: 15px;
+  background-color: #bbc8de;
+  color: #122620;
 }
 
 .body {
-    /*background-color:#C3E0E5;*/
+  /*background-color:#C3E0E5;*/
 }
 
 .create-button {
-    background-color: #0C4160;
-    color: white;
+  margin-right: 50px;
+  background-color: #0c4160;
+  color: white;
 }
 
 .create-button:hover {
-    background-color: #071330;
-    color: white;
+  background-color: #071330;
+  color: white;
+}
+.div-central {
+  justify-content: center;
+  align-items: center;
 }

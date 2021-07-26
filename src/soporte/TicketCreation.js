@@ -124,7 +124,7 @@ export default function TicketCreation() {
         <Card style={{ marginBottom:'8%', padding: '4% 0 0 5%',backgroundColor:'#E0E0E0'}}>
             <h5 className="d-flex flex-direction-row">{title} {required && <p style={{color:'red'}}>*</p>}</h5>
             <Dropdown >
-                <Dropdown.Toggle disabled={(title === "Responsable" && loadingRRHH) || (title === "Cliente" && loadingClients)} style={{marginBottom:'5%',backgroundColor:'#045174'}} variant="secondary" id="dropdown-basic">
+                <Dropdown.Toggle disabled={(title === "Responsable" && loadingRRHH) || (title === "Cliente" && loadingClients)} style={{marginBottom:'5%',backgroundColor:'#001F3D'}} variant="secondary" id="dropdown-basic">
                     {data === "" || data === -1 ? "Seleccionar" : data}
                 </Dropdown.Toggle>
     
@@ -206,7 +206,7 @@ export default function TicketCreation() {
             <div style={{padding:'2%',backgroundColor:'#eee'}}>
                 <div style={{display:'flex', flexDirection:'row', justifyContent:'space-between', margin: '0 16% 1.5% 16%'}}>
                     <div style={{display:'flex', flexDirection:'row', justifyContent:'space-between', width:'30%'}}>
-                        <Button variant="primary" style={{border:'none',backgroundColor:'#ca6212',color:'white', }} onClick={handleBackButtonClick}>Volver</Button>
+                        <Button variant="primary" style={{border:'none',backgroundColor:'#001F3D',color:'white', }} onClick={handleBackButtonClick}>Volver</Button>
                         <h3>Nuevo Ticket</h3>
                     </div>
                 </div>
@@ -239,7 +239,7 @@ export default function TicketCreation() {
                             </Card>
                         </Card>
                     </Card>
-                    <Button type="submit" className='btn' variant="primary" style={{backgroundColor:'#ca6212', border:'none',color:'white',padding:'1%', width:'10%', marginTop:'2%', alignSelf:'center' }}>Crear Ticket</Button>
+                    <Button type="submit" className='btn' variant="primary" style={{backgroundColor:'#E87A00', border:'none',color:'white',padding:'1%', width:'10%', marginTop:'2%', alignSelf:'center' }}>Crear Ticket</Button>
                 </form>
             </div>
             <AlertModal

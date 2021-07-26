@@ -49,13 +49,14 @@ class TaskEdit extends React.Component {
     this.setState({ employees: emps });
 
     let prjs = await getProjects("");
-    this.setState({ projects: prjs, isReady: true });
+    this.setState({ projects: prjs });
 
     //Obtengo para editar
     if (this.state.operation === "Editar") {
       let task = await getTaskById(this.state.idProject, this.state.idTask);
       this.setState({ formData: task });
     }
+    this.setState({ isReady: true });
   }
   startTimer = () => {
     setTimeout(() => {
@@ -89,12 +90,17 @@ class TaskEdit extends React.Component {
     }
 
     let wrongDate = false;
+    const hStyle = { color: "red" };
     if (end_date < start_date) wrongDate = true;
     this.setState({
       errorMessages: {
-        name: !name ? "Campo obligatorio" : "",
-        project: !idProject ? "Campo obligatorio" : "",
-        end_date: wrongDate ? "Fecha de finalización debe ser posterior" : "",
+        name: !name ? <h6 style={hStyle}>Campo obligatorio</h6> : "",
+        project: !idProject ? <h6 style={hStyle}>Campo obligatorio</h6> : "",
+        end_date: wrongDate ? (
+          <h6 style={hStyle}>Fecha de finalización debe ser posterior</h6>
+        ) : (
+          ""
+        ),
       },
     });
     if (name && idProject && !wrongDate) return true;
@@ -171,7 +177,7 @@ class TaskEdit extends React.Component {
           </div>
           <div className="form-group row">
             <div class="col-sm-3 col-form-label">
-              <label>Proyecto:</label>
+              <label>Proyecto(*):</label>
             </div>
             <div class="col-sm-8 col-form-label">
               <select
@@ -188,22 +194,23 @@ class TaskEdit extends React.Component {
                   </option>
                 ))}
               </select>
-              <span>{errorMessages["project"]}</span>
+              <p className="p-corrido">{errorMessages["project"]}</p>
             </div>
           </div>
           <div className="form-group row">
             <div class="col-sm-3 col-form-label">
-              <label>Nombre*:</label>
+              <label>Nombre(*):</label>
             </div>
             <div class="col-sm-8 col-form-label">
               <input
+                maxlength="50"
                 className="form-control"
                 type="text"
                 name="name"
                 value={formData.name}
                 onChange={this.handleChange}
               />
-              <span>{errorMessages["name"]}</span>
+              <p className="p-corrido">{errorMessages["name"]}</p>
             </div>
           </div>
           <div className="form-group row">
@@ -212,6 +219,7 @@ class TaskEdit extends React.Component {
             </div>
             <div class="col-sm-8 col-form-label">
               <textarea
+                maxlength="1024"
                 className="form-control"
                 type="text"
                 name="description"
@@ -253,7 +261,9 @@ class TaskEdit extends React.Component {
                 locale="es"
                 isClearable
               />
-              <div>
+            </div>
+            <div class="col-sm-3 col-form-label">
+              <div className="icon-center">
                 <i
                   className="bi bi-x-lg m-10"
                   onClick={() => this.clearDateValue("start_date")}
@@ -266,19 +276,23 @@ class TaskEdit extends React.Component {
               <label>Fecha de finalización:</label>
             </div>
             <div class="col-sm-3 col-form-label">
-              <DatePicker
-                className="form-control"
-                value={formData.end_date}
-                onChange={(value) => this.handleDateChange("end_date", value)}
-                locale="es"
-                dateFormat="yyyy-MM-dd"
-              />
-              <div>
+              <div className="form-group">
+                <DatePicker
+                  className="form-control"
+                  value={formData.end_date}
+                  onChange={(value) => this.handleDateChange("end_date", value)}
+                  locale="es"
+                  dateFormat="yyyy-MM-dd"
+                />
+              </div>
+              <p className="p-corrido">{errorMessages["end_date"]}</p>
+            </div>
+            <div className="col-sm-3 col-form-label">
+              <div className="icon-center">
                 <i
                   className="bi bi-x-lg m-10"
                   onClick={() => this.clearDateValue("end_date")}
                 ></i>
-                <span>{errorMessages["end_date"]}</span>
               </div>
             </div>
           </div>
@@ -317,9 +331,9 @@ class TaskEdit extends React.Component {
                 <option value="BLOQUEADA">Bloqueada</option>
               </select>
             </div>
-
           </div>
-          <div className="form-group row">
+          <p>(*) Indica campo obligatorio</p>
+          <div className="form-group row div-central">
             <div class="col-sm-5 col-form-label">
               <button
                 type="button"

@@ -53,11 +53,14 @@ function App() {
           <Route exact path="/soporte/productos/:idProducto">
             <SupportTicketGrid />
           </Route>
-          <Route exact path="/soporte/tickets/:idTicket">
-            <TicketDetails />
-          </Route>
           <Route exact path="/soporte/tickets/create/:idProducto">
             <TicketCreation />
+          </Route>
+          <Route exact path="/soporte/tickets/:idTicket/:idTarea">
+            <TicketDetails />
+          </Route>
+          <Route exact path="/soporte/tickets/:idTicket">
+            <TicketDetails />
           </Route>
           <ProjectRoute />
         </Switch>

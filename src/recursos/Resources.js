@@ -60,9 +60,6 @@ export default class Resources extends React.Component {
         return (
             <div>
                 <NavigationBar/>
-                <br/>
-                <br/>
-                <br/>
                 <ul style={{  padding: '10px 5%',  listStyle: 'none',  backgroundColor:'#E0E0E0', color: 'black', flexDirection:'row', display:'flex'}}>
                     <li style={{marginRight:'5px'}}><a href="/home"> Home</a> / </li>
                     <li style={{marginRight:'5px'}}>Recursos</li>

@@ -5,8 +5,8 @@ import "./home.css";
 
 export default function Home() {
   return (
-    <div>
-      <h1 className="bienvenida">Bienvenidos a PSA</h1>
+    <div style={{backgroundColor:'#eee' ,height:'100vh'}}>
+      <h1 className="bienvenida" >Bienvenidos a PSA</h1>
       <div id="card_container" class="row justify-content-around">
         <DashboardHomeCard
           titulo="Proyectos"

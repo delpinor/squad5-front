@@ -9,9 +9,9 @@ export default function TaskEditContainer(props) {
   const operation = props.match.params.operation;
   return (
     <body className="for-breadcrumb">
-      <div class="pl-1 pt-2">
+      <div className="pt-1">
         <nav aria-label="breadcrumb">
-          <ol class="breadcrumb">
+          <ol class="breadcrumb ol-bread">
             <li class="breadcrumb-item">
               <i href="/home" class="bi bi-house-door-fill m-2" />
               <a href="/home">Inicio</a>

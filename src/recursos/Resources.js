@@ -28,7 +28,11 @@ export default class Resources extends React.Component {
         .then(data => {
             this.Recursos = data;
             if (this.Recursos != null && !isArray((this.Recursos))){
-                document.getElementsByTagName("tbody")[0].innerHTML = '<tr><td>'+0+'</td><td>'+this.Recursos.nombre+'</td><td>'+this.Recursos.apellido+'</td><td>'+this.Recursos.legajo+'</td></tr>';
+                if(this.Recursos.legajo != undefined){
+                    document.getElementsByTagName("tbody")[0].innerHTML = '<tr><td>'+0+'</td><td>'+this.Recursos.nombre+'</td><td>'+this.Recursos.apellido+'</td><td>'+this.Recursos.legajo+'</td></tr>';
+                }else{
+                    document.getElementsByTagName("tbody")[0].innerHTML = '';
+                }
             }else if (this.Recursos != null && isArray(this.Recursos)){
                 let string = '';
                  //this.Recursos.map((persona, index) =>

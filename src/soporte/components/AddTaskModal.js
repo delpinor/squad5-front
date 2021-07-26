@@ -13,7 +13,7 @@ export default function AddTaskModal({showModal, handleCloseModal, idTicket, han
     const [taskSelected, setTaskSelected] = useState({idTask: -1, name:""})
 
     const getProjects = ()  => {
-        const url = "http://project-squad5.herokuapp.com/api/projects/"
+        const url = "https://project-squad5.herokuapp.com/api/projects/"
     
         const requestOptions = {
             method: 'GET'
@@ -44,7 +44,7 @@ export default function AddTaskModal({showModal, handleCloseModal, idTicket, han
         console.log("Task es :",taskSelected);
         console.log(`Quiero asdas vincular el task ${taskSelected.idTask} al ticket ${idTicket}`);
 
-        const url = `http://psa2021-soporte.herokuapp.com/ticket/${idTicket}/task/${taskSelected.idTask}`
+        const url = `https://psa2021-soporte.herokuapp.com/ticket/${idTicket}/task/${taskSelected.idTask}`
         console.log("url:",url);
 
  
@@ -69,7 +69,7 @@ export default function AddTaskModal({showModal, handleCloseModal, idTicket, han
         setProjectSelected(projectName)
         if(!tasksIsLoading) setTasksIsLoading(true)
 
-        const url = `http://project-squad5.herokuapp.com/api/projects/${projectId}/tasks/`
+        const url = `https://project-squad5.herokuapp.com/api/projects/${projectId}/tasks/`
     
         const requestOptions = {
             method: 'GET'

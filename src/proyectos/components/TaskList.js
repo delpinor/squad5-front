@@ -52,6 +52,7 @@ class TaskList extends React.Component {
     this.setState({ tasks: response, isReady: true });
   };
   deleteTask = async () => {
+    this.setState({ isReady: false });
     await deleteTaskById(this.state.idProject, this.state.taskToDelete);
     this.setState({ showModalTask: false });
     this.getTaskList();
@@ -206,7 +207,11 @@ class TaskList extends React.Component {
           <Modal.Header>
             <Modal.Title>Tarea: {this.state.taskSelectedName}</Modal.Title>
           </Modal.Header>
-          <ModalBody>{this.state.taskSelectedDescription}</ModalBody>
+          <ModalBody>
+            {this.state.taskSelectedDescription === ""
+              ? "Sin descripción"
+              : this.state.taskSelectedDescription}
+          </ModalBody>
           <ModalFooter>
             <button
               className="btn btn-secondary"

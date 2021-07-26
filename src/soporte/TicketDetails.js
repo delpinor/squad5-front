@@ -116,7 +116,7 @@ export default function TicketDetails() {
 
 
     const handleDeleteTicket = () => {
-        const url = `http://psa2021-soporte.herokuapp.com/ticket/${currentTicket.id}`
+        const url = `https://psa2021-soporte.herokuapp.com/ticket/${currentTicket.id}`
         const requestOptions = {
             method: 'DELETE'
         }
@@ -138,7 +138,7 @@ export default function TicketDetails() {
     }
     
     const handleGetTicket = () => {
-        const url = `http://psa2021-soporte.herokuapp.com/ticket/${idTicket}`
+        const url = `https://psa2021-soporte.herokuapp.com/ticket/${idTicket}`
     
         const requestOptions = {
             method: 'GET'
@@ -290,7 +290,7 @@ export default function TicketDetails() {
     const linkTaskWithTicket = () => {
         console.log(`vengo de tareas y quiero vincular el task ${idTarea} al ticket ${idTicket}`);
 
-        const url = `http://psa2021-soporte.herokuapp.com/ticket/${idTicket}/task/${idTarea}`
+        const url = `https://psa2021-soporte.herokuapp.com/ticket/${idTicket}/task/${idTarea}`
 
         const jsonBody = JSON.stringify({
             ticketId: idTicket,

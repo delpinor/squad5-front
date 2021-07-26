@@ -13,7 +13,7 @@ export default function TicketGrid({ticketData}) {
     return (
         <div style={{ margin: '0 10% 0 10%', height:'300px', overflow:'auto'}}>
              <Table striped bordered hover variant="dark">
-                <thead style={{backgroundColor:'#001F3D'}}>
+                <thead style={{backgroundColor:'#045174'}}>
                     <tr>
                     <th>Nombre</th>
                     <th>Estado</th>

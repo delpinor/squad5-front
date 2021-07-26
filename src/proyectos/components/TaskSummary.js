@@ -118,7 +118,11 @@ class TaskSummary extends React.Component {
           <Modal.Header>
             <Modal.Title>Tarea: {this.state.taskSelectedName}</Modal.Title>
           </Modal.Header>
-          <ModalBody>{this.state.taskSelectedDescription}</ModalBody>
+          <ModalBody>
+            {this.state.taskSelectedDescription === ""
+              ? "Sin descripción"
+              : this.state.taskSelectedDescription}
+          </ModalBody>
           <ModalFooter>
             <button
               className="btn btn-secondary"

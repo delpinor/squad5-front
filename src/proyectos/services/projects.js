@@ -10,6 +10,9 @@ export async function getProjects(q) {
       window.location.href = "/proyectos/";
     });
   let data = response.data.data;
+  data.sort(function (a, b) {
+    return b.id - a.id;
+  });
   return data;
 }
 

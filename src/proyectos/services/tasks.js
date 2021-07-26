@@ -11,6 +11,9 @@ export async function getTasks(idProject, q) {
       window.location.href = "/proyectos/";
     });
   let data = response.data;
+  data.sort(function (a, b) {
+    return b.task_id - a.task_id;
+  });
   return data;
 }
 

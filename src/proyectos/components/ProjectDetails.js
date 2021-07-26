@@ -48,7 +48,7 @@ class ProjectDetails extends React.Component {
           <table class="table project-table tabla-detalles">
             <tr>
               <th>Líder de proyecto: </th>
-              <td>{projectInfo.leader_name} </td>
+              <td>{replaceIfEmpty(projectInfo.leader_name)} </td>
               <th>Inicio planeado: </th>
               <td>{replaceIfEmpty(projectInfo.planned_start_date)}</td>
             </tr>

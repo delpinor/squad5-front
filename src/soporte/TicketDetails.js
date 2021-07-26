@@ -128,7 +128,7 @@ export default function TicketDetails() {
                    console.log("Error");
                    return;
                 }
-                history.goBack();
+                history.push(`/soporte/productos/${currentTicket && currentTicket.productId}`)
             })
     }
 
@@ -237,6 +237,7 @@ export default function TicketDetails() {
             priority: currentTicket.priority,
             responsableId: currentTicket.responsableId
         })    
+        console.log("Lo que le envio al aapi:",jsonBody);
         const requestOptions = {
             method: 'POST',
             headers: {
@@ -263,19 +264,21 @@ export default function TicketDetails() {
                 return response.json();
             }).then((ticket) => {
 
-                if(ticket && currentTicket.state === "RESUELTO"){
+                if(ticket && ticket.resolvedDate && currentTicket.state === "RESUELTO"){
+                    console.log("La date dice",ticket.resolvedDate);
                     setCurrentTicket({
                         ...currentTicket,
                         resolvedDate: ticket.resolvedDate.split('T')[0]
                     })
                 }
                 if(ticket && currentTicket.state !== "RESUELTO"){
+                    console.log("no es resuelto");
                     setCurrentTicket({
                         ...currentTicket,
                         resolvedDate: null
                     })
                 }
-                if(ticket){
+                if(ticket && ticket.expirationDate){
                     setCurrentTicket({
                         ...currentTicket,
                         expirationDate: ticket.expirationDate.split('T')[0]
@@ -465,7 +468,7 @@ export default function TicketDetails() {
                         showModal={showModalSuccessLink} 
                         title="Vinculación de tarea exitosa"
                         isAlert={false}
-                        text="Se realizó la vinculación con el ticket exitosamente.."
+                        text="Se realizó la vinculación con el ticket exitosamente."
                     />
                     <AlertModalDelete 
                         handleCloseModal={handleCloseModalDelete} 

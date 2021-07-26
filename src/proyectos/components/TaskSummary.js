@@ -51,15 +51,37 @@ class TaskSummary extends React.Component {
             ) : (
               <thead>
                 <tr>
-                <th style={{width: '5%'}} scope="col">Id</th>
-                <th style={{width: '25%'}} scope="col">Nombre</th>
-                <th style={{width: '8%'}} scope="col">Creación</th>
-                <th style={{width: '10%'}} scope="col">Inicio</th>
-                <th style={{width: '10%'}} scope="col">Finalización</th>
-                <th style={{width: '16%'}} scope="col">Asigando a</th>
-                <th style={{width: '7%'}} scope="col">Prioridad</th>
-                <th style={{width: '7%'}} scope="col">Estado</th>
-                <th style={{width: '12%'}} scope="col">Ver descripción</th>
+                  <th style={{ width: "5%" }} scope="col">
+                    Id
+                  </th>
+                  <th style={{ width: "25%" }} scope="col">
+                    Nombre
+                  </th>
+                  <th style={{ width: "8%" }} scope="col">
+                    Creación
+                  </th>
+                  <th style={{ width: "10%" }} scope="col">
+                    Inicio
+                  </th>
+                  <th style={{ width: "10%" }} scope="col">
+                    Finalización
+                  </th>
+                  <th style={{ width: "16%" }} scope="col">
+                    Asigando a
+                  </th>
+                  <th style={{ width: "7%" }} scope="col">
+                    Prioridad
+                  </th>
+                  <th style={{ width: "7%" }} scope="col">
+                    Estado
+                  </th>
+                  <th
+                    className="text-center"
+                    style={{ width: "12%" }}
+                    scope="col"
+                  >
+                    Ver descripción
+                  </th>
                 </tr>
               </thead>
             )}
@@ -76,7 +98,7 @@ class TaskSummary extends React.Component {
                   </td>
                   <td>{readablePriority(task.priority)}</td>
                   <td>{readableStatus(task.status)}</td>
-                  <td>
+                  <td className="text-center">
                     <button
                       title="Ver descripción"
                       class="btn btn-primary button"

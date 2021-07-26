@@ -5,12 +5,12 @@ import "./home.css";
 
 export default function Home() {
   return (
-    <div style={{backgroundColor:'#eee' ,height:'100vh'}}>
-      <h1 className="bienvenida" >Bienvenidos a PSA</h1>
+    <div style={{ backgroundColor: "#eee", height: "100vh" }}>
+      <h1 className="bienvenida">Bienvenidos a PSA</h1>
       <div id="card_container" class="row justify-content-around">
         <DashboardHomeCard
           titulo="Proyectos"
-          descripcion="Módulo para creación y visualización de proyectos y tareas."
+          descripcion="Módulo para creación y administración de proyectos y tareas."
           src_imagen="./proyecto.jpg"
           href="./proyectos"
         />
